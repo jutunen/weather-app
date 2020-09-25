@@ -14,7 +14,8 @@ import {
  } from "./functions.js";
 
 async function connectMongoose() {
-    await mongoose.connect("mongodb://user_1:user_1@localhost/banking", {
+    await mongoose.connect("mongodb://user_1:user_1@localhost/banking-mongoose", {
+    //await mongoose.connect("mongodb://user_1:user_1@localhost/banking", {
         useNewUrlParser: true,
         useUnifiedTopology: true
     });
@@ -47,5 +48,5 @@ app.delete("/location/:location", (req, res) => {
     handleRemoveReq(req, res);
 });
 
-console.log("Listening port 5000");
-app.listen(5000);
+console.log("Listening port 5100");
+app.listen(5100);
