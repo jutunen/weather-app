@@ -16,11 +16,19 @@ export class RestService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
-  getLocUrl = 'http://127.0.0.1:5000/locations';
-  addLocUrl = 'http://127.0.0.1:5000/new';
-  delLocUrl = 'http://127.0.0.1:5000/remove/';
+/*
+  getLocUrl = 'http://127.0.0.1:5000/location/all';
+  addLocUrl = 'http://127.0.0.1:5000/location/new';
+  delLocUrl = 'http://127.0.0.1:5000/location/';
   getDataUrl = 'http://127.0.0.1:5000/data/';
-  addDataUrl = 'http://127.0.0.1:5000/add';
+  addDataUrl = 'http://127.0.0.1:5000/data/save';
+*/
+
+  getLocUrl = 'https://jussin.site/wthr/location/all';
+  addLocUrl = 'https://jussin.site/wthr/location/new';
+  delLocUrl = 'https://jussin.site/wthr/location/';
+  getDataUrl = 'https://jussin.site/wthr/data/';
+  addDataUrl = 'https://jussin.site/wthr/data/save';
 
   getLocations(): Observable<[]> {
     return this.http.get<[]>(this.getLocUrl).pipe(
