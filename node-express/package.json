@@ -1,0 +1,19 @@
+{
+  "name": "weather-express-mongo",
+  "version": "0.1.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node -r esm server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
+    "esm": "^3.2.25",
+    "express": "^4.16.3",
+    "mongoose": "^5.2.7"
+  }
+}
