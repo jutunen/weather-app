@@ -6,12 +6,25 @@ export async function handleAddReq(req, res) {
 
   const location = req.body.location;
   const data = req.body.data;
+  let results;
 
-  let results = await WeatherData.deleteMany({location: location});
+  try {
+    results = await WeatherData.deleteMany({location: location});
+  } catch(error) {
+    console.log(error);
+    res.status(500).send();
+    return;
+  }
 
   let dataWithLocation = data.map( obj => ( {...obj, location: location}) );
 
-  results = await WeatherData.insertMany(dataWithLocation);
+  try {
+    results = await WeatherData.insertMany(dataWithLocation);
+  } catch(error) {
+    console.log(error);
+    res.status(500).send();
+    return;
+  }
 
   res.status(200).send("");
 }
@@ -20,11 +33,18 @@ export async function handleAddReq(req, res) {
 export async function handleDataReq(req, res) {
 
   let location = req.params.location;
+  let results;
 
-  const results =
-  await WeatherData.find({ location:location, date: { $ne: null } })
-        .select(['-_id','temperature','rainfall','wind_speed','date'])
-        .exec();
+  try {
+    results =
+    await WeatherData.find({ location:location, date: { $ne: null } })
+          .select(['-_id','temperature','rainfall','wind_speed','date'])
+          .exec();
+  } catch(error) {
+    console.log(error);
+    res.status(500).send();
+    return;
+  }
 
   res.status(200).send(results);
 }
@@ -33,17 +53,30 @@ export async function handleRemoveReq(req, res) {
 
   let location = req.params.location;
 
-  WeatherData.deleteMany({location: location}, function (err) {
-    res.status(204).send(location);
-  });
+  try {
+    await WeatherData.deleteMany({location: location});
+  } catch(error) {
+    console.log(error);
+    res.status(500).send();
+    return;
+  }
+
+  res.status(204).send(location);
 }
 
 export async function handleLocationsReq(req, res) {
 
-  WeatherData.find().distinct("location", function (err, ids) {
-    // ids is an array of all ObjectIds
-    res.status(200).send(ids);
-  });
+  let results;
+
+  try {
+    results = await WeatherData.find().distinct("location");
+  } catch(error) {
+    console.log(error);
+    res.status(500).send();
+    return;
+  }
+
+  res.status(200).send(results);
 }
 
 export async function handleNewReq(req, res) {
@@ -58,12 +91,18 @@ export async function handleNewReq(req, res) {
     date: data.d,
   };
 
-  WeatherData.update(
-    { location: data.l, date: data.d },
-    new_data,
-    { upsert: true },
-    (err, obj) => {
-      res.status(200).send(new_data);
-    }
-  );
+  let results;
+
+  try {
+    results = await WeatherData.update(
+      { location: data.l, date: data.d },
+      new_data,
+      { upsert: true });
+  } catch(error) {
+    console.log(error);
+    res.status(500).send();
+    return;
+  }
+
+  res.status(200).send(new_data);
 }
