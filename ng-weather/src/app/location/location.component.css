@@ -1,3 +1,8 @@
+:host {
+  display:flex;
+  flex-wrap: wrap;
+}
+
 #location_main {
   display: flex;
   flex-wrap: wrap;
@@ -8,12 +13,11 @@
 .location {
   margin: 0px 6px 6px 6px;
   background-color: #ebf6f9;
-  padding: 2px 12px;
+  padding: 4px 12px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 10px;
-  height:40px;
 }
 
 /* CSS spinner code starts here */

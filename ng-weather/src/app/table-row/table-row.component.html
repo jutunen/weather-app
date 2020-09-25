@@ -10,7 +10,7 @@
   </div>
 
   <div class="w_input_sub w_temperature_width" [ngClass]="{redbackground: data.valid_temperature === true ? false : true}">
-    <input tooltip="{{temp_tooltip}}" [options]="tt_opt" [ngModel]="data.temperature" (input)="updateTemperature($event)" placeholder="" type=number step="1" min="-70" max="70" class="w_input_number">
+    <input tooltip="{{temp_tooltip}}" [options]="tt_opt" [ngModel]="data.temperature" (input)="updateTemperature($event)" placeholder="" type=number step="1" min="-70" max="70" class="w_input_number_temp">
   </div>
 
   <div class="w_input_sub w_rainfall_width" [ngClass]="{redbackground: data.valid_rainfall === true ? false : true}">

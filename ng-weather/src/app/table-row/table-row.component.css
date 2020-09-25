@@ -36,6 +36,10 @@
 }
 
 .w_input_number {
+  width: 40px;
+}
+
+.w_input_number_temp {
   width: 50px;
 }
 

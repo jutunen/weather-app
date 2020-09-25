@@ -2,7 +2,7 @@
   <div id="main_container">
     <button type="button" (click)="addNew();w_table_ref.scrollTop=0">Lisää uusi rivi</button>
     <button type="button" tooltip="{{allDatesAreValid ? order_tt : order_tt_disabled}}" [options]="tt_opt" [disabled]="!allDatesAreValid" (click)="orderLines()">Järjestä rivit</button>
-    <div id="w_table_header_main" class="w_table_width">
+    <div id="w_table_header_main">
       <div class="w_table_header_sub w_date_width">
         Päivämäärä
       </div>
@@ -15,7 +15,7 @@
       <div class="w_table_header_sub w_wind_speed_width">
         Tuulen nopeus<br>m/s
       </div>
-      <div class="w_table_header_sub w_delete_row_width">
+      <div class="w_table_header_sub" style="width:60px;">
       </div>
     </div>
     <div id="w_table_container" #w_table_ref>
