@@ -1,0 +1,48 @@
+<div
+  id="spinner"
+  class="progress"
+  [ngStyle]="spinnerIsVisible && { display: 'inline-block' }"
+>
+  <div>Loading...</div>
+</div>
+<div id="location_main">
+  <div class="location">
+    <label>Valitse paikkakunta:</label>
+    <select [ngModel]="selectedLocation" (change)="saveAll($event)">
+      <option *ngFor="let loc of locations" value="{{ loc }}">{{ loc }}</option>
+    </select>
+  </div>
+
+  <div class="location">
+    <span>Lisää uusi paikkakunta:</span>
+    <input placeholder="paikkakunnan nimi" type="text" (keyup.enter)="addLocation(locationName.value); locationName.value = ''"  #locationName />
+    <button
+      type="button"
+      (click)="addLocation(locationName.value); locationName.value = ''"
+    >
+      Lisää
+    </button>
+  </div>
+
+  <div *ngIf="selectedLocation" style="display: flex;">
+    <div class="location">
+      <span>Tallenna paikkakunnan tiedot:</span>
+      <button
+        type="button"
+        [disabled]="!allDatesAreValid"
+        (click)="saveAll()"
+      >
+        Tallenna
+      </button>
+    </div>
+    <div class="location">
+      <span>Poista paikkakunta:</span>
+      <button
+        type="button"
+        (click)="deleteLocation(selectedLocation); selectedLocation = ''"
+      >
+        Poista {{ selectedLocation }}
+      </button>
+    </div>
+  </div>
+</div>

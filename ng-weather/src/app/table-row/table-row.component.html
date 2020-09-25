@@ -1,0 +1,27 @@
+<div class="w_input_main w_table_width" [ngClass]="{redborder: del_button_hover === 0 ? false : true}">
+  <div class="w_duplicate_indicator" [ngStyle]="!data.uniq_date && {'display': 'flex'}">
+    <= DUPLIKAATTI PVM
+  </div>
+  <div class="w_input_sub w_date_width" [ngClass]="{redbackground: data.valid_date === true ? false : true}">
+    <input [ngModel]="data.date" (keyup.enter)="updateDate($event)" (blur)="updateDate($event)" placeholder="pp.kk.vvvv" type=text class="w_input_date">
+    <div ngDefaultControl id="calendar_button" (ngModelChange)="updateDatepickerDate($event)" [ngModel]="data.date" [dpDayPicker]="datepicker_config" theme="dp-material">
+      <span [innerHTML]="calendar_icon"></span>
+    </div>
+  </div>
+
+  <div class="w_input_sub w_temperature_width" [ngClass]="{redbackground: data.valid_temperature === true ? false : true}">
+    <input tooltip="{{temp_tooltip}}" [options]="tt_opt" [ngModel]="data.temperature" (input)="updateTemperature($event)" placeholder="" type=number step="1" min="-70" max="70" class="w_input_number">
+  </div>
+
+  <div class="w_input_sub w_rainfall_width" [ngClass]="{redbackground: data.valid_rainfall === true ? false : true}">
+    <input tooltip="{{value_tooltip}}" [options]="tt_opt" [ngModel]="data.rainfall" (input)="updateRainfall($event)" placeholder="" type=number step="1" min="0" max="50" class="w_input_number">
+  </div>
+
+  <div class="w_input_sub w_wind_speed_width" [ngClass]="{redbackground: data.valid_wind_speed === true ? false : true}">
+    <input tooltip="{{value_tooltip}}" [options]="tt_opt" [ngModel]="data.wind_speed" (input)="updateWindSpeed($event)" placeholder="" type=number step="1" min="0" max="50" class="w_input_number">
+  </div>
+
+  <div class="w_input_sub w_delete_row_width">
+    <img tooltip="{{remove_tooltip}}" [options]="tt_opt" id="w_del_button_img" src="assets/delete-button.png" (click)="delete()" (mouseover)='mouseover()' (mouseout)='mouseout()'>
+  </div>
+</div>

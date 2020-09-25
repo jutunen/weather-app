@@ -1,0 +1,26 @@
+.radio_button_line {
+  width: 470px;
+  height: 40px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 2px;
+}
+
+.hyphen {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+input[type="radio"] {
+  margin-top: -1px;
+  vertical-align: middle;
+}
+
+.label {
+  cursor: pointer;
+}
+
+.label:hover {
+  text-decoration: underline;
+}

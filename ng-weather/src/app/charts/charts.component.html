@@ -1,0 +1,77 @@
+<div *ngIf="data.length > 0" class="chart_date">
+  <div class="radio_button_line" [ngStyle]="singleDateChartSelected && {'border': '2px solid gray'}">
+    <label class="label">
+    <input
+      type="radio"
+      value="1"
+      name="chart_type"
+      [(ngModel)]="singleDateChartSelected"
+      (ngModelChange)="onRadioChange()"
+    />
+    <span>Näytä yhden päivän graafi:</span>
+    </label>
+    <select [(ngModel)]="selectedDate" (change)="onSingleDateChange()">
+      <option disabled hidden value="undefined">Valitse pvm</option>
+      <option *ngFor="let date of dates" value="{{ date }}">{{ date }}</option>
+    </select>
+  </div>
+  <div class="radio_button_line" [ngStyle]="!singleDateChartSelected && {'border': '2px solid gray'}">
+    <label class="label">
+    <input
+      type="radio"
+      value=""
+      name="chart_type"
+      [(ngModel)]="singleDateChartSelected"
+      (ngModelChange)="onRadioChange()"
+    />
+    <span>Näytä aikajakson graafi:</span>
+    </label>
+    <select [(ngModel)]="selectedDate_1" (change)="onDateSpanChange()">
+      <option disabled hidden value="undefined">Valitse pvm</option>
+      <option *ngFor="let date of dates" value="{{ date }}">{{ date }}</option>
+    </select>
+    <span class="hyphen">
+      -
+    </span>
+    <select [(ngModel)]="selectedDate_2" (change)="onDateSpanChange()">
+      <option disabled hidden value="undefined">Valitse pvm</option>
+      <option *ngFor="let date of dates" value="{{ date }}">{{ date }}</option>
+    </select>
+  </div>
+</div>
+
+<div *ngIf="barChartData.length">
+  <div style="display: block;">
+    <canvas
+      baseChart
+      width="300"
+      height="600"
+      [datasets]="barChartData"
+      [labels]="barChartLabels"
+      [options]="barChartOptions"
+      [plugins]="barChartPlugins"
+      [legend]="barChartLegend"
+      [chartType]="barChartType"
+    >
+    </canvas>
+  </div>
+</div>
+
+<div *ngIf="lineChartData.length">
+  <div style="display: block;">
+    <canvas
+      baseChart
+      width="300"
+      height="600"
+      [datasets]="lineChartData"
+      [labels]="lineChartLabels"
+      [options]="lineChartOptions"
+      [colors]="lineChartColors"
+      [legend]="lineChartLegend"
+      [chartType]="lineChartType"
+      [plugins]="lineChartPlugins"
+      (chartHover)="chartHovered($event)"
+      (chartClick)="chartClicked($event)"
+    ></canvas>
+  </div>
+</div>

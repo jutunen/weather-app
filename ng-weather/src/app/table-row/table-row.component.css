@@ -1,0 +1,72 @@
+.w_input_main {
+  display: flex;
+  background-color: #d8ecf3;
+  justify-content: center;
+  margin-top: 1px;
+  margin-bottom: 1px;
+  border: 1px solid darkgray;
+  position: relative;
+  height: 38px;
+}
+
+.w_duplicate_indicator {
+  position: absolute;
+  /*display: flex;*/
+  justify-content: flex-start;
+  align-items: center;
+  width:220px;
+  height: 35px;
+  background-color: rgba(255,0,0,0.7);
+  padding-left: 5px;
+  font-weight: bold;
+  display:none;
+}
+
+.w_input_sub {
+  display: flex;
+  justify-content: center;
+  margin-left: 1px;
+  margin-right: 1px;
+  align-items: center;
+  padding: 2px;
+}
+
+.w_input_date {
+  width: 80px;
+}
+
+.w_input_number {
+  width: 50px;
+}
+
+#w_del_button_img {
+  width: 25px;
+  height: 25px;
+}
+
+#w_del_button_img:hover {
+  cursor: pointer;
+}
+
+#calendar_button {
+  width: 20px;
+  height: 20px;
+  font-size: 20px;
+  margin-left: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#calendar_button:hover {
+  cursor: pointer;
+}
+
+.redborder {
+  height: 36px;
+  border: 2px solid red;
+}
+
+.redbackground {
+  background-color: #ff6666;
+}

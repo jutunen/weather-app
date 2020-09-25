@@ -1,0 +1,31 @@
+* {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+select:hover, button:hover{
+  cursor: pointer;
+}
+
+.w_table_width {
+  width: 460px;
+}
+
+.w_date_width {
+  width: 140px;
+}
+
+.w_temperature_width {
+  width: 140px;
+}
+
+.w_rainfall_width {
+  width: 140px;
+}
+
+.w_wind_speed_width {
+  width: 140px;
+}
+
+.w_delete_row_width {
+  width: 30px;
+}
