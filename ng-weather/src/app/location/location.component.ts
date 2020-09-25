@@ -39,7 +39,9 @@ export class LocationComponent implements OnInit {
     this.restService.getLocations().subscribe((locations) => {
       this.locations = locations;
       this.stateService.showSpinner(false);
-      this.stateService.setLocation("OULU");
+      if(this.locations.length > 0) {
+        this.stateService.setLocation(this.locations[0]);
+      }
     });
   }
 
