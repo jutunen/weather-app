@@ -1,0 +1,20 @@
+[Unit]
+Description=Weather Server
+
+[Service]
+ExecStart=/usr/local/bin/node -r esm /opt/weather_server/server.js
+# Required on some systems
+WorkingDirectory=/opt/weather_server
+Restart=always
+# Restart service after 5 seconds if node service crashes
+RestartSec=5
+# Output to syslog
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=weather
+#User=<alternate user>
+#Group=<alternate group>
+Environment=NODE_ENV=production PORT=5100
+
+[Install]
+WantedBy=multi-user.target
