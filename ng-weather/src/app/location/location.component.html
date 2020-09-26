@@ -15,7 +15,12 @@
 
   <div class="location">
     <span>Lisää uusi paikkakunta:</span>
-    <input placeholder="paikkakunnan nimi" type="text" (keyup.enter)="addLocation(locationName.value); locationName.value = ''"  #locationName />
+    <input
+      placeholder="paikkakunnan nimi"
+      type="text"
+      (keyup.enter)="addLocation(locationName.value); locationName.value = ''"
+      #locationName
+    />
     <button
       type="button"
       (click)="addLocation(locationName.value); locationName.value = ''"
@@ -27,11 +32,7 @@
   <div *ngIf="selectedLocation" style="display: flex;">
     <div class="location">
       <span>Tallenna paikkakunnan tiedot:</span>
-      <button
-        type="button"
-        [disabled]="!allDatesAreValid"
-        (click)="saveAll()"
-      >
+      <button type="button" [disabled]="!allDatesAreValid" (click)="saveAll()">
         Tallenna
       </button>
     </div>

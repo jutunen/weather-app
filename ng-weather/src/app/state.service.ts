@@ -7,7 +7,6 @@ import { ValidationService } from "./validation.service";
   providedIn: "root",
 })
 export class StateService {
-
   duplicates: string[] = [];
 
   private readonly _location = new BehaviorSubject<string>("");
@@ -28,8 +27,8 @@ export class StateService {
     this._location.next(location);
   }
 
-  showSpinner( param: boolean ): void {
-    if(param) {
+  showSpinner(param: boolean): void {
+    if (param) {
       this._spinnerIsVisible.next(true);
     } else {
       this._spinnerIsVisible.next(false);
@@ -44,8 +43,10 @@ export class StateService {
   }
 
   private _checkDatesValidity(data: WeatherData[]): void {
-    let invalidDates = data.filter( obj => obj.valid_date === false || obj.uniq_date === false );
-    if(invalidDates.length > 0) {
+    let invalidDates = data.filter(
+      (obj) => obj.valid_date === false || obj.uniq_date === false
+    );
+    if (invalidDates.length > 0) {
       console.log("allDatesAreValid: false");
       this._allDatesAreValid.next(false);
     } else {
@@ -77,7 +78,7 @@ export class StateService {
       valid_temperature: true,
       valid_rainfall: true,
       valid_wind_speed: true,
-      uniq_date: true
+      uniq_date: true,
     };
     current.unshift(newObj);
     this._setData(current);
@@ -134,7 +135,6 @@ export class StateService {
   }
 
   private _validateRow(data: WeatherData) {
-
     data.uniq_date = true;
 
     if (this.validationSrvc.dateIsValid(data.date)) {
@@ -163,11 +163,18 @@ export class StateService {
     }
   }
 
-  // FIXME: duplicate function in weather-chart.component.ts
+  // FIXME: duplicate function in charts.component.ts
   dateArraySorter(a: any, b: any): number {
-    let dToI = (date) => { let [day,month,year] = date.split('.'); return Number(year + month + day); }
-    if (dToI(a.date) > dToI(b.date)) { return 1 }
-    if (dToI(a.date) < dToI(b.date)) { return -1 }
-    return 0
+    let dToI = (date) => {
+      let [day, month, year] = date.split(".");
+      return Number(year + month + day);
+    };
+    if (dToI(a.date) > dToI(b.date)) {
+      return 1;
+    }
+    if (dToI(a.date) < dToI(b.date)) {
+      return -1;
+    }
+    return 0;
   }
 }

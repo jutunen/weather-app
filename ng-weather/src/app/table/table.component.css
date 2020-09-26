@@ -1,3 +1,9 @@
+:host {
+  width: 480px;
+  height: 700px;
+  background-color: #b1dae7;
+}
+
 button {
   margin: 10px;
 }
@@ -46,7 +52,22 @@ button {
 }
 
 @media only screen and (max-width: 1024px) {
+
   #w_table_container {
     height: 380px;
   }
+
+  :host {
+    height: 500px;
+    margin-bottom: 6px;
+  }
+
+}
+
+@media only screen and (max-width: 600px) {
+
+  :host {
+    width: 450px;
+  }
+
 }

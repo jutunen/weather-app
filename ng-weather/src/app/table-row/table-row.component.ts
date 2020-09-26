@@ -1,29 +1,31 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { WeatherData } from '../dailyweather';
-import { StateService } from '../state.service';
+import { Component, OnInit, Input } from "@angular/core";
+import { WeatherData } from "../dailyweather";
+import { StateService } from "../state.service";
 
 @Component({
-  selector: 'app-table-row',
-  templateUrl: './table-row.component.html',
-  styleUrls: ['./table-row.component.css']
+  selector: "app-table-row",
+  templateUrl: "./table-row.component.html",
+  styleUrls: ["./table-row.component.css"],
 })
 export class TableRowComponent implements OnInit {
-
-  constructor(private stateService: StateService) { }
+  constructor(private stateService: StateService) {}
 
   del_button_hover: number = 0;
-  calendar_icon: string = '&#128197;';
-  datepicker_config = {firstDayOfWeek:"mo",locale:"fi",format:"DD.MM.YYYY"};
-  temp_tooltip: string = 'maksimiarvo:70 minimiarvo:-70';
-  value_tooltip: string = 'maksimiarvo:50 minimiarvo:0';
-  remove_tooltip: string = 'Poistaa rivin.';
+  calendar_icon: string = "&#128197;";
+  datepicker_config = {
+    firstDayOfWeek: "mo",
+    locale: "fi",
+    format: "DD.MM.YYYY",
+  };
+  temp_tooltip: string = "maksimiarvo:70 minimiarvo:-70";
+  value_tooltip: string = "maksimiarvo:50 minimiarvo:0";
+  remove_tooltip: string = "Poistaa rivin.";
   tt_opt = {
-    'placement': 'bottom',
-    'show-delay': 500
+    placement: "bottom",
+    "show-delay": 500,
   };
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   @Input() data: WeatherData;
 
@@ -32,7 +34,7 @@ export class TableRowComponent implements OnInit {
   }
 
   updateDatepickerDate(event): void {
-    if(this.data.date !== event) {
+    if (this.data.date !== event) {
       this.data.date = event;
       this.stateService.updateRow(this.data);
     }

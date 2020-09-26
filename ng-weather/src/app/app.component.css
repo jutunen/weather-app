@@ -1,5 +1,5 @@
 
-#input_and_chart_container {
+#table_and_chart_container {
   width: 100%;
   display: flex;
   align-items: center;
@@ -7,40 +7,10 @@
   flex-wrap: wrap;
 }
 
-#input_container {
-  width: 480px;
-  height: 700px;
-  background-color: #b1dae7;
-}
-
-#chart_container {
-  width:calc(100% - 480px);
-  height: 700px;
-  background-color: #d8ecf3;
-}
-
 @media only screen and (max-width: 1024px) {
 
-  #input_and_chart_container {
+  #table_and_chart_container {
     flex-direction: column;
-  }
-
-  #input_container {
-    height: 500px;
-    margin-bottom: 6px;
-  }
-
-  #chart_container {
-    width: 100%;
-    align-self: flex-start;
-  }
-}
-
-@media only screen and (max-width: 600px) {
-
-  #input_container {
-    width: 450px;
-    height: 500px;
   }
 
 }

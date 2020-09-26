@@ -1,4 +1,4 @@
-.w_input_main {
+.row_main {
   display: flex;
   background-color: #d8ecf3;
   justify-content: center;
@@ -9,12 +9,12 @@
   height: 38px;
 }
 
-.w_duplicate_indicator {
+.duplicate_indicator {
   position: absolute;
   /*display: flex;*/
   justify-content: flex-start;
   align-items: center;
-  width:220px;
+  width:180px;
   height: 35px;
   background-color: rgba(255,0,0,0.7);
   padding-left: 5px;
@@ -22,7 +22,7 @@
   display:none;
 }
 
-.w_input_sub {
+.row_sub {
   display: flex;
   justify-content: center;
   margin-left: 1px;
@@ -31,24 +31,24 @@
   padding: 2px;
 }
 
-.w_input_date {
+.date_input {
   width: 80px;
 }
 
-.w_input_number {
+.number_input {
   width: 40px;
 }
 
-.w_input_number_temp {
+.temperature_input {
   width: 50px;
 }
 
-#w_del_button_img {
+#del_button_img {
   width: 25px;
   height: 25px;
 }
 
-#w_del_button_img:hover {
+#del_button_img:hover {
   cursor: pointer;
 }
 

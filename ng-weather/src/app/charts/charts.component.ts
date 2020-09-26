@@ -21,13 +21,13 @@ export class ChartsComponent implements OnInit {
 
   public barChartOptions: ChartOptions = {
     layout: {
-        padding: {
-            left: 0,
-            right: 0,
-            top: 20,
-            bottom: 0
-        }
+      padding: {
+        left: 0,
+        right: 0,
+        top: 20,
+        bottom: 0,
       },
+    },
     //legend: { labels: { fontSize: 6 }},
     animation: { duration: 0 },
     title: { fontSize: 20 },
@@ -38,7 +38,13 @@ export class ChartsComponent implements OnInit {
       yAxes: [{ ticks: { beginAtZero: true, fontSize: 16 } }],
     },
     plugins: {
-      datalabels: { offset: -6, color: "black", anchor: "end", align: "top", font: { size: 16 } },
+      datalabels: {
+        offset: -6,
+        color: "black",
+        anchor: "end",
+        align: "top",
+        font: { size: 16 },
+      },
     },
   };
   public barChartLabels: Label[] = [
@@ -54,7 +60,7 @@ export class ChartsComponent implements OnInit {
   public lineChartData: ChartDataSets[] = [];
   public lineChartLabels: Label[] = [];
   public lineChartOptions: ChartOptions = {
-    legend: { labels: { fontSize: 16 }},
+    legend: { labels: { fontSize: 16 } },
     animation: { duration: 0 },
     responsive: true,
     maintainAspectRatio: false,
@@ -148,7 +154,7 @@ export class ChartsComponent implements OnInit {
       this.selectedDate_2 = this.dates[this.dates.length - 1];
     }
 
-    if ( this.dates.length > 0 && this.selectedDate === "" ) {
+    if (this.dates.length > 0 && this.selectedDate === "") {
       this.selectedDate = this.dates[0];
     }
 
@@ -252,6 +258,7 @@ export class ChartsComponent implements OnInit {
     return Number(year + month + day);
   }
 
+  // FIXME: duplicate function in state.service.ts
   dateArraySorter(a: any, b: any): number {
     let dToI = (date) => {
       let [day, month, year] = date.split(".");
