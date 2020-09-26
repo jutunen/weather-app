@@ -47,16 +47,13 @@ export class StateService {
       (obj) => obj.valid_date === false || obj.uniq_date === false
     );
     if (invalidDates.length > 0) {
-      console.log("allDatesAreValid: false");
       this._allDatesAreValid.next(false);
     } else {
       this._allDatesAreValid.next(true);
-      console.log("allDatesAreValid: true");
     }
   }
 
   setData(data: []): void {
-    console.log("setData!");
     this._setData(data);
   }
 
@@ -85,7 +82,6 @@ export class StateService {
   }
 
   updateRow(row: WeatherData): void {
-    console.log("updateRow!");
     let current: WeatherData[];
     current = this._weatherData.getValue();
     current = current.map((obj) => {
@@ -123,8 +119,6 @@ export class StateService {
       for (let index = 0; index < data.length; index++) {
         this._validateDateUniqueness(data[index]);
       }
-    } else {
-      console.log("No duplicates found!");
     }
   }
 
@@ -163,7 +157,6 @@ export class StateService {
     }
   }
 
-  // FIXME: duplicate function in charts.component.ts
   dateArraySorter(a: any, b: any): number {
     let dToI = (date) => {
       let [day, month, year] = date.split(".");

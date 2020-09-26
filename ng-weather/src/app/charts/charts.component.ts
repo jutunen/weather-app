@@ -135,7 +135,7 @@ export class ChartsComponent implements OnInit {
           obj.valid_wind_speed === true &&
           obj.uniq_date === true
       )
-      .sort(this.dateArraySorter);
+      .sort(this.stateService.dateArraySorter);
 
     this.dates = this.data.map((obj) => obj.date);
 
@@ -258,18 +258,4 @@ export class ChartsComponent implements OnInit {
     return Number(year + month + day);
   }
 
-  // FIXME: duplicate function in state.service.ts
-  dateArraySorter(a: any, b: any): number {
-    let dToI = (date) => {
-      let [day, month, year] = date.split(".");
-      return Number(year + month + day);
-    };
-    if (dToI(a.date) > dToI(b.date)) {
-      return 1;
-    }
-    if (dToI(a.date) < dToI(b.date)) {
-      return -1;
-    }
-    return 0;
-  }
 }
