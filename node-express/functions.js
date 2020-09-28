@@ -84,18 +84,14 @@ export async function handleNewReq(req, res) {
   const data = req.body;
 
   const new_data = {
-    temperature: data.t,
-    rainfall: data.r,
-    wind_speed: data.w,
-    location: data.l,
-    date: data.d,
+    location: data.location,
   };
 
   let results;
 
   try {
     results = await WeatherData.update(
-      { location: data.l, date: data.d },
+      { location: data.l },
       new_data,
       { upsert: true });
   } catch(error) {
