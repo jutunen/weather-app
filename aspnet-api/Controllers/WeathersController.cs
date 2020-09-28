@@ -62,21 +62,11 @@ namespace WeatherApi.Controllers
             return NoContent();
         }
 
-/*
-        [HttpDelete("{id:length(24)}")]
-        public IActionResult Delete(string id)
+        [HttpDelete("/location/{location}")]
+        public IActionResult Delete(string location)
         {
-            var weather = _weatherService.Get(id);
-
-            if (weather == null)
-            {
-                return NotFound();
-            }
-
-            _weatherService.Remove(weather.Id);
-
+            _weatherService.DeleteLocation(location);
             return NoContent();
         }
-*/        
     }
 }

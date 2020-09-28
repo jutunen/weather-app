@@ -58,32 +58,26 @@ namespace WeatherApi.Services
             var filter = Builders<Weather>.Filter.Eq("location", location);
             _weathers.DeleteMany(filter);
 
-            var dataAvecLocation = data.Select( x => new Weather() 
-                                  { 
-                                     location = location,
-                                     date = x.date,
-                                     temperature = x.temperature,
-                                     rainfall = x.rainfall,
-                                     wind_speed = x.wind_speed
-                                  } ).ToList();
+            var dataAvecLocation = new List<Weather>();
 
+            if(data.Count == 0) {
+                dataAvecLocation.Add( new Weather() { location = location } );
+            } else {
+                dataAvecLocation = data.Select( x => new Weather() 
+                                    { 
+                                        location = location,
+                                        date = x.date,
+                                        temperature = x.temperature,
+                                        rainfall = x.rainfall,
+                                        wind_speed = x.wind_speed
+                                    } ).ToList();
+            }
             _weathers.InsertMany(dataAvecLocation);
         }
 
-        public Weather Create(Weather weather)
-        {
-            _weathers.InsertOne(weather);
-            return weather;
+        public void DeleteLocation(string location) {
+            var filter = Builders<Weather>.Filter.Eq("location", location);
+            _weathers.DeleteMany(filter);
         }
-/*
-        public void Update(string id, Weather weatherIn) =>
-            _weathers.ReplaceOne(weather => weather.Id == id, weatherIn);
-
-        public void Remove(Weather weatherIn) =>
-            _weathers.DeleteOne(weather => weather.Id == weatherIn.Id);
-
-        public void Remove(string id) => 
-            _weathers.DeleteOne(weather => weather.Id == id);
-*/            
     }
 }
