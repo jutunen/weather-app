@@ -60,7 +60,20 @@ export class LocationComponent implements OnInit {
     });
   }
 
-  saveAll(event): void {
+  saveAll(event, location: string = ""): void {
+    if(!this.selectedLocation) {
+      // there is nothing to be saved
+      console.log("there is nothing to be saved!");
+      if(event) {
+        console.log("setting new location: " + event.target.value);
+        this.stateService.setLocation(event.target.value);
+      } else if(location) {
+        console.log("adding new location: " + location);
+        this.addLocation(location);
+      }
+      return;
+    }
+
     let keylessData = this.data.map((obj) => ({
       rainfall: Number(obj.rainfall),
       date: obj.date,
@@ -75,7 +88,11 @@ export class LocationComponent implements OnInit {
       .subscribe((response) => {
         this.stateService.showSpinner(false);
         if (event) {
+          console.log("setting new location: " + event.target.value);
           this.stateService.setLocation(event.target.value);
+        } else if(location) {
+          console.log("adding new location: " + location);
+          this.addLocation(location);
         }
       });
   }

@@ -18,12 +18,12 @@
   <input
     placeholder="paikkakunnan nimi"
     type="text"
-    (keyup.enter)="addLocation(locationName.value); locationName.value = ''"
+    (keyup.enter)="saveAll('',locationName.value); locationName.value = ''"
     #locationName
   />
   <button
     type="button"
-    (click)="addLocation(locationName.value); locationName.value = ''"
+    (click)="saveAll('',locationName.value); locationName.value = ''"
   >
     Lisää
   </button>
