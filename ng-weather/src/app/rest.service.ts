@@ -49,13 +49,13 @@ export class RestService {
     );
   }
 
-  getData(location: string): Observable<[]> {
+  getLocationData(location: string): Observable<[]> {
     return this.http.get<[]>(this.getDataUrl + location).pipe(
       catchError(this.handleError<[]>('Säätietojen haku', []))
     );
   }
 
-  addData(location: string, data: WeatherData[]): Observable<string> {
+  saveAll(location: string, data: WeatherData[]): Observable<string> {
     return this.http.post<string>(this.addDataUrl, {location:location, data: data}, this.httpOptions).pipe(
       catchError(this.handleError<string>('Tietojen tallennus', ""))
     );

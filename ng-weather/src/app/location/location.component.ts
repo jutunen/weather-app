@@ -53,9 +53,9 @@ export class LocationComponent implements OnInit {
     }
     this.stateService.showSpinner(true);
     this.restService.addLocation(name).subscribe((loc) => {
-      this.locations.push(loc);
+      this.locations.push(name);
       this.locations = [...new Set(this.locations)];
-      this.stateService.setLocation(loc);
+      this.stateService.setLocation(name);
       this.stateService.showSpinner(false);
     });
   }
@@ -69,14 +69,12 @@ export class LocationComponent implements OnInit {
     }));
 
     this.stateService.showSpinner(true);
-    console.log("this.selectedLocation: " + this.selectedLocation);
+
     this.restService
-      .addData(this.selectedLocation, (keylessData as unknown) as WeatherData[])
+      .saveAll(this.selectedLocation, (keylessData as unknown) as WeatherData[])
       .subscribe((response) => {
-        console.log(response);
         this.stateService.showSpinner(false);
         if (event) {
-          console.log(event);
           this.stateService.setLocation(event.target.value);
         }
       });
@@ -85,7 +83,6 @@ export class LocationComponent implements OnInit {
   deleteLocation(name: string): void {
     this.stateService.showSpinner(true);
     this.restService.deleteLocation(name).subscribe((val) => {
-      console.log("val: " + val);
       this.locations = this.locations.filter((loc) => loc !== name);
       this.stateService.setData([]);
       this.stateService.setLocation("");

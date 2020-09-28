@@ -14,8 +14,8 @@ import {
  } from "./functions.js";
 
 async function connectMongoose() {
-    await mongoose.connect("mongodb://user_1:user_1@localhost/banking-mongoose", {
-    //await mongoose.connect("mongodb://user_1:user_1@localhost/banking", {
+    //await mongoose.connect("mongodb://user_1:user_1@localhost/banking-mongoose", {
+    await mongoose.connect("mongodb://user_1:user_1@localhost/banking", {
         useNewUrlParser: true,
         useUnifiedTopology: true
     });
@@ -29,24 +29,24 @@ app.use(bodyParser.urlencoded({ extended: false }));
 //app.use((req, res, next) => setTimeout(next, 500));
 
 app.get("/location/all", (req, res) => {
-    handleLocationsReq(req, res);
+    getLocations(req, res);
 });
 
 app.get("/data/:location", (req, res) => {
-    handleDataReq(req, res);
+    getLocationData(req, res);
 });
 
 app.post("/location/new", (req, res) => {
-    handleNewReq(req, res);
+    addLocation(req, res);
 });
 
 app.post("/data/save", (req, res) => {
-    handleAddReq(req, res);
+    saveAll(req, res);
 });
 
 app.delete("/location/:location", (req, res) => {
-    handleRemoveReq(req, res);
+    deleteLocation(req, res);
 });
 
 console.log("Listening port 5100");
-app.listen(5100);
+app.listen(5000);

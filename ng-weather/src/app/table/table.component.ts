@@ -45,12 +45,11 @@ export class TableComponent implements OnInit {
   }
 
   getServerData(location: string): void {
-    console.log("location: " + location);
     if (location) {
       this.dataLoaded = false;
       this.stateService.showSpinner(true);
       this.location = location;
-      this.restService.getData(location).subscribe((data) => {
+      this.restService.getLocationData(location).subscribe((data) => {
         this.stateService.showSpinner(false);
         this.stateService.setData(data);
         this.stateService.sortRows();

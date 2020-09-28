@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 import { WeatherData } from "./models.js";
 
-export async function handleAddReq(req, res) {
+export async function saveAll(req, res) {
 
   const location = req.body.location;
   const data = req.body.data;
@@ -30,7 +30,7 @@ export async function handleAddReq(req, res) {
 }
 
 
-export async function handleDataReq(req, res) {
+export async function getLocationData(req, res) {
 
   let location = req.params.location;
   let results;
@@ -49,7 +49,7 @@ export async function handleDataReq(req, res) {
   res.status(200).send(results);
 }
 
-export async function handleRemoveReq(req, res) {
+export async function deleteLocation(req, res) {
 
   let location = req.params.location;
 
@@ -64,7 +64,7 @@ export async function handleRemoveReq(req, res) {
   res.status(204).send(location);
 }
 
-export async function handleLocationsReq(req, res) {
+export async function getLocations(req, res) {
 
   let results;
 
@@ -79,7 +79,7 @@ export async function handleLocationsReq(req, res) {
   res.status(200).send(results);
 }
 
-export async function handleNewReq(req, res) {
+export async function addLocation(req, res) {
 
   const data = req.body;
 
@@ -100,5 +100,5 @@ export async function handleNewReq(req, res) {
     return;
   }
 
-  res.status(200).send(new_data);
+  res.status(200).send("");
 }
