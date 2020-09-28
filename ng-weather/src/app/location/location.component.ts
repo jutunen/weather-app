@@ -53,19 +53,19 @@ export class LocationComponent implements OnInit {
     }
     this.stateService.showSpinner(true);
     this.restService.addLocation(name).subscribe((loc) => {
-      this.locations.push(loc.location);
+      this.locations.push(loc);
       this.locations = [...new Set(this.locations)];
-      this.stateService.setLocation(loc.location);
+      this.stateService.setLocation(loc);
       this.stateService.showSpinner(false);
     });
   }
 
   saveAll(event): void {
     let keylessData = this.data.map((obj) => ({
-      rainfall: obj.rainfall,
+      rainfall: Number(obj.rainfall),
       date: obj.date,
-      wind_speed: obj.wind_speed,
-      temperature: obj.temperature,
+      wind_speed: Number(obj.wind_speed),
+      temperature: Number(obj.temperature),
     }));
 
     this.stateService.showSpinner(true);

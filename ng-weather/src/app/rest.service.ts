@@ -16,12 +16,11 @@ export class RestService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
-  getLocUrl = 'http://127.0.0.1:5100/location/all';
-  addLocUrl = 'http://127.0.0.1:5100/location/new';
-  delLocUrl = 'http://127.0.0.1:5100/location/';
-  getDataUrl = 'http://127.0.0.1:5100/data/';
-  addDataUrl = 'http://127.0.0.1:5100/data/save';
-
+  getLocUrl = 'http://127.0.0.1:5000/location/all';
+  addLocUrl = 'http://127.0.0.1:5000/location/new';
+  delLocUrl = 'http://127.0.0.1:5000/location/';
+  getDataUrl = 'http://127.0.0.1:5000/data/';
+  addDataUrl = 'http://127.0.0.1:5000/data/save';
 /*
   getLocUrl = 'https://jussin.site/wthr/location/all';
   addLocUrl = 'https://jussin.site/wthr/location/new';
@@ -35,12 +34,12 @@ export class RestService {
     );
   }
 
-  addLocation(location: string): Observable<DailyWeather> {
+  addLocation(location: string): Observable<string> {
 
-    let params = {l:location, t:null, r:null, w:null, d:null};
+    let params = {location:location};
 
-    return this.http.post<DailyWeather>(this.addLocUrl, params, this.httpOptions).pipe(
-      catchError(this.handleError<DailyWeather>('Paikkakunnan lisäys', <DailyWeather>{} ))
+    return this.http.post<string>(this.addLocUrl, params, this.httpOptions).pipe(
+      catchError(this.handleError<string>('Paikkakunnan lisäys', "" ))
     );
   }
 
