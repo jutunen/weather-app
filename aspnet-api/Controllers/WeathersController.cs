@@ -2,12 +2,11 @@ using WeatherApi.Models;
 using WeatherApi.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using Microsoft.AspNetCore.Cors;
 
 namespace WeatherApi.Controllers
 {
 
-    public class CreateLocationRequest {
+    public class AddLocationRequest {
         public string location { get; set; }
     }
 
@@ -50,14 +49,14 @@ namespace WeatherApi.Controllers
         }        
 
         [HttpPost("location/new")]
-        public ActionResult<string> CreateLocation(CreateLocationRequest req)
+        public IActionResult Post(AddLocationRequest req)
         {
-            _weatherService.CreateNewLocation(req.location);
-            return req.location;
+            _weatherService.AddLocation(req.location);
+            return NoContent();
         }
 
         [HttpPost("data/save")]
-        public IActionResult SaveAll(SaveAllRequest req)
+        public IActionResult Post(SaveAllRequest req)
         {
             _weatherService.SaveAll(req.location, req.data);
             return NoContent();

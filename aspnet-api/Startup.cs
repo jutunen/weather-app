@@ -30,16 +30,6 @@ namespace WeatherApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors(options =>
-            {
-                options.AddDefaultPolicy(
-                    builder =>
-                    {
-                        builder.WithOrigins("http://127.0.0.1",
-                                            "http://localhost");
-                    });
-            });            
-
             // requires using Microsoft.Extensions.Options
             services.Configure<WeatherApiDatabaseSettings>(Configuration.GetSection(nameof(WeatherApiDatabaseSettings)));
 

@@ -29,10 +29,8 @@ namespace WeatherApi.Services
             await _weathers.Indexes.CreateOneAsync(new CreateIndexModel<Weather>(indexKeysDefinition, options));
         }        
 
-        public List<string> GetLocations() => _weathers.Distinct<string>("location", FilterDefinition<Weather>.Empty).ToList();
-
-        public List<Weather> Get() =>
-            _weathers.Find(weather => true).ToList();
+        public List<string> GetLocations() => 
+            _weathers.Distinct<string>("location", FilterDefinition<Weather>.Empty).ToList();
 
         public List<Weather> GetLocationData(string location) {
             var filterBuilder = Builders<Weather>.Filter;
@@ -43,7 +41,7 @@ namespace WeatherApi.Services
             return result;
         }
 
-        public UpdateResult CreateNewLocation(string location) {
+        public UpdateResult AddLocation(string location) {
             //var filterBuilder = Builders<Weather>.Filter;
             //var filter = filterBuilder.Eq("location", data.location) & filterBuilder.Eq("date", data.date);
             var filter = Builders<Weather>.Filter.Eq("location", location);
