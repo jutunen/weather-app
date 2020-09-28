@@ -18,12 +18,12 @@
   <input
     placeholder="paikkakunnan nimi"
     type="text"
-    (keyup.enter)="saveAll('',locationName.value); locationName.value = ''"
+    (keyup.enter)="saveAll('', locationName.value); locationName.value = ''"
     #locationName
   />
   <button
     type="button"
-    (click)="saveAll('',locationName.value); locationName.value = ''"
+    (click)="saveAll('', locationName.value); locationName.value = ''"
   >
     Lisää
   </button>
@@ -32,7 +32,13 @@
 <div *ngIf="selectedLocation" style="display: flex;">
   <div class="location">
     <span>Tallenna paikkakunnan tiedot:</span>
-    <button type="button" [disabled]="!allDatesAreValid" (click)="saveAll()">
+    <button
+      type="button"
+      [disabled]="!allDatesAreValid"
+      (click)="saveAll()"
+      tooltip="{{ allDatesAreValid ? tt_save : tt_save_disabled }}"
+      [options]="tt_opt"
+    >
       Tallenna
     </button>
   </div>

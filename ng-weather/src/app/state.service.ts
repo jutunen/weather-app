@@ -21,6 +21,9 @@ export class StateService {
   private readonly _spinnerIsVisible = new BehaviorSubject<boolean>(false);
   readonly spinnerIsVisible$ = this._spinnerIsVisible.asObservable();
 
+  private readonly _dataIsIntact = new BehaviorSubject<boolean>(true);
+  readonly dataIsIntact$ = this._dataIsIntact.asObservable();
+
   constructor(private validationSrvc: ValidationService) {}
 
   setLocation(location: string): void {
@@ -39,6 +42,7 @@ export class StateService {
     this._assignKeys(data);
     this._validateData(data);
     this._checkDatesValidity(data);
+    this._dataIsIntact.next(false);
     this._weatherData.next(data);
   }
 
@@ -51,6 +55,10 @@ export class StateService {
     } else {
       this._allDatesAreValid.next(true);
     }
+  }
+
+  setDataAsIntact(): void {
+    this._dataIsIntact.next(true);
   }
 
   setData(data: []): void {

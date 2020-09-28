@@ -14,6 +14,15 @@ export class LocationComponent implements OnInit {
   spinnerIsVisible: boolean = false;
   data: WeatherData[] = [];
   allDatesAreValid: boolean = false;
+  dataIsIntact: boolean = false;
+
+  tt_save: string = "Tallentaa kaikki paikkakunnan tiedot.";
+  tt_save_disabled: string =
+    'Tallentaminen on mahdollista vain jos kaikki päivämäärät ovat virheettömiä. Korjaa "punaiset" päivämäärät.';
+  tt_opt = {
+    placement: "bottom",
+    "show-delay": 300,
+  };
 
   constructor(
     private restService: RestService,
@@ -31,6 +40,9 @@ export class LocationComponent implements OnInit {
     this.stateService.weatherData$.subscribe((data) => (this.data = data));
     this.stateService.allDatesAreValid$.subscribe(
       (state) => (this.allDatesAreValid = state)
+    );
+    this.stateService.dataIsIntact$.subscribe(
+      (state) => (this.dataIsIntact = state)
     );
   }
 
@@ -61,17 +73,19 @@ export class LocationComponent implements OnInit {
   }
 
   saveAll(event, location: string = ""): void {
-    if(!this.selectedLocation) {
+    if (this.dataIsIntact) {
       // there is nothing to be saved
       console.log("there is nothing to be saved!");
-      if(event) {
+      if (event) {
         console.log("setting new location: " + event.target.value);
         this.stateService.setLocation(event.target.value);
-      } else if(location) {
+      } else if (location) {
         console.log("adding new location: " + location);
         this.addLocation(location);
       }
       return;
+    } else {
+      console.log("Data has changed, going to save it!");
     }
 
     let keylessData = this.data.map((obj) => ({
@@ -87,10 +101,11 @@ export class LocationComponent implements OnInit {
       .saveAll(this.selectedLocation, (keylessData as unknown) as WeatherData[])
       .subscribe((response) => {
         this.stateService.showSpinner(false);
+        this.stateService.setDataAsIntact();
         if (event) {
           console.log("setting new location: " + event.target.value);
           this.stateService.setLocation(event.target.value);
-        } else if(location) {
+        } else if (location) {
           console.log("adding new location: " + location);
           this.addLocation(location);
         }

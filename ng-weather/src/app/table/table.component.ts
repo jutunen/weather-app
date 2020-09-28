@@ -9,10 +9,11 @@ import { WeatherData } from "../dailyweather";
   styleUrls: ["./table.component.css"],
 })
 export class TableComponent implements OnInit {
-  location: string;
+  location: string; //ngIf
   data: WeatherData[] = [];
   allDatesAreValid: boolean = false;
-  dataLoaded: boolean = false;
+  dataLoaded: boolean = false; //ngIf
+  dataIsIntact: boolean = false;
   order_tt: string = "Järjestää rivit päivämäärän mukaan.";
   order_tt_disabled: string =
     'Järjestäminen on mahdollista vain jos kaikki päivämäärät ovat virheettömiä. Korjaa "punaiset" päivämäärät.';
@@ -53,6 +54,7 @@ export class TableComponent implements OnInit {
         this.stateService.showSpinner(false);
         this.stateService.setData(data);
         this.stateService.sortRows();
+        this.stateService.setDataAsIntact();
         this.dataLoaded = true;
       });
     } else {
