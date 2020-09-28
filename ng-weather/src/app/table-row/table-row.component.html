@@ -90,11 +90,13 @@
 
   <div class="row_sub w_delete_row_width">
     <img
+      tabindex="0"
       tooltip="{{ remove_tooltip }}"
       [options]="tt_opt"
       id="del_button_img"
       src="assets/delete-button.png"
       (click)="delete()"
+      (keyup.enter)="delete()"
       (mouseover)="mouseover()"
       (mouseout)="mouseout()"
     />
