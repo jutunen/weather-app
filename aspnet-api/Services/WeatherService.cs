@@ -1,10 +1,7 @@
 using WeatherApi.Models;
 using MongoDB.Driver;
-using MongoDB.Bson;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace WeatherApi.Services
 {
@@ -26,23 +23,18 @@ namespace WeatherApi.Services
         public List<Weather> GetLocationData(string location) {
             var filterBuilder = Builders<Weather>.Filter;
             var filter = filterBuilder.Eq("location", location) & filterBuilder.Ne<string>("date", null);
-            //var projection = Builders<Weather>.Projection.Exclude("_id").Exclude("location");
-            //var result = _weathers.Find(filter).Project(projection).ToList();
             var result = _weathers.Find(filter).ToList();
             return result;
         }
 
         public UpdateResult AddLocation(string location) {
-            //var filterBuilder = Builders<Weather>.Filter;
-            //var filter = filterBuilder.Eq("location", data.location) & filterBuilder.Eq("date", data.date);
             var filter = Builders<Weather>.Filter.Eq("location", location);
-
-            //var update = Builders<Weather>.Update.Set("location", location).Set("date", null).Set("temperature", null).Set("rainfall", null).Set("wind_speed", null);
             var update = Builders<Weather>.Update.Set("location", location);
 
             var options = new UpdateOptions();
             options.IsUpsert = true;
-            return _weathers.UpdateOne(filter,update,options);
+            var result = _weathers.UpdateOne(filter,update,options);
+            return result;
         }
 
         public void SaveAll(string location, List<WeatherSansLocation> data) {
