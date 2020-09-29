@@ -88,7 +88,12 @@ export class LocationComponent implements OnInit {
       console.log("Data has changed, going to save it!");
     }
 
-    let keylessData = this.data.map((obj) => ({
+    // filter bad dates away:
+    let filteredData = this.data.filter(
+      (obj) => obj.valid_date === true && obj.uniq_date === true
+    );
+
+    let keylessData = filteredData.map((obj) => ({
       rainfall: Number(obj.rainfall),
       date: obj.date,
       wind_speed: Number(obj.wind_speed),
