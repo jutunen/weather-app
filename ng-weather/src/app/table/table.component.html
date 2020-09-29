@@ -5,9 +5,6 @@
     </button>
     <button
       type="button"
-      tooltip="{{ allDatesAreValid ? order_tt : order_tt_disabled }}"
-      [options]="tt_opt"
-      [disabled]="!allDatesAreValid"
       (click)="orderLines()"
     >
       Järjestä rivit
