@@ -34,10 +34,7 @@
     <span>Tallenna paikkakunnan tiedot:</span>
     <button
       type="button"
-      [disabled]="!allDatesAreValid"
       (click)="saveAll()"
-      tooltip="{{ allDatesAreValid ? tt_save : tt_save_disabled }}"
-      [options]="tt_opt"
     >
       Tallenna
     </button>

@@ -13,16 +13,8 @@ export class LocationComponent implements OnInit {
   selectedLocation: string;
   spinnerIsVisible: boolean = false;
   data: WeatherData[] = [];
-  allDatesAreValid: boolean = false;
+  //allDatesAreValid: boolean = false;
   dataIsIntact: boolean = false;
-
-  tt_save: string = "Tallentaa kaikki paikkakunnan tiedot.";
-  tt_save_disabled: string =
-    'Tallentaminen on mahdollista vain jos kaikki päivämäärät ovat virheettömiä. Korjaa "punaiset" päivämäärät.';
-  tt_opt = {
-    placement: "bottom",
-    "show-delay": 300,
-  };
 
   constructor(
     private restService: RestService,
@@ -38,9 +30,11 @@ export class LocationComponent implements OnInit {
     );
     this.getLocations();
     this.stateService.weatherData$.subscribe((data) => (this.data = data));
+    /*
     this.stateService.allDatesAreValid$.subscribe(
       (state) => (this.allDatesAreValid = state)
     );
+    */
     this.stateService.dataIsIntact$.subscribe(
       (state) => (this.dataIsIntact = state)
     );
@@ -88,12 +82,7 @@ export class LocationComponent implements OnInit {
       console.log("Data has changed, going to save it!");
     }
 
-    // filter bad dates away:
-    let filteredData = this.data.filter(
-      (obj) => obj.valid_date === true && obj.uniq_date === true
-    );
-
-    let keylessData = filteredData.map((obj) => ({
+    let keylessData = this.data.map((obj) => ({
       rainfall: Number(obj.rainfall),
       date: obj.date,
       wind_speed: Number(obj.wind_speed),
