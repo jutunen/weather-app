@@ -9,6 +9,4 @@ const WeatherDataSchema = new mongoose.Schema({
     date: String
 });
 
-WeatherDataSchema.index({location: 1, date: 1}, {unique: true});
-
 export const WeatherData = mongoose.model("weather", WeatherDataSchema);

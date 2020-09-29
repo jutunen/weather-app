@@ -2,7 +2,6 @@ const express = require("express");
 const cors = require('cors');
 const bodyParser = require("body-parser");
 const app = express();
-
 const mongoose = require("mongoose");
 
 import {
@@ -13,9 +12,11 @@ import {
   deleteLocation
  } from "./functions.js";
 
+const PORT_NUMBER = 5000;
+
 async function connectMongoose() {
-    await mongoose.connect("mongodb://user_1:user_1@localhost/banking-mongoose", {
-    //await mongoose.connect("mongodb://user_1:user_1@localhost/banking", {
+    //await mongoose.connect("mongodb://user_1:user_1@localhost/banking-mongoose", {
+    await mongoose.connect("mongodb://user_1:user_1@localhost/banking", {
         useNewUrlParser: true,
         useUnifiedTopology: true
     });
@@ -48,5 +49,5 @@ app.delete("/location/:location", (req, res) => {
     deleteLocation(req, res);
 });
 
-console.log("Listening port 5100");
-app.listen(5100);
+console.log("Listening port " + PORT_NUMBER);
+app.listen(PORT_NUMBER);

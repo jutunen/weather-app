@@ -4,7 +4,7 @@ import { WeatherData } from "./models.js";
 
 export async function saveAll(req, res) {
 
-  const location = req.body.location;
+  const location = req.body.location.toUpperCase();
   const data = req.body.data;
   let results;
 
@@ -84,7 +84,7 @@ export async function addLocation(req, res) {
   const data = req.body;
 
   const new_data = {
-    location: data.location,
+    location: data.location.toUpperCase(),
   };
 
   let results;
