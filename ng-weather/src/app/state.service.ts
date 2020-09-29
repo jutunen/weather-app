@@ -84,6 +84,7 @@ export class StateService {
       valid_rainfall: true,
       valid_wind_speed: true,
       uniq_date: true,
+      empty_date: true
     };
     current.unshift(newObj);
     this._setData(current);
@@ -141,9 +142,15 @@ export class StateService {
 
     if (this.validationSrvc.dateIsValid(data.date)) {
       data.valid_date = true;
+      data.empty_date = false;
       data.date = this.validationSrvc.formatDate(data.date);
     } else {
       data.valid_date = false;
+      if(this.validationSrvc.dateIsEmpty(data.date)) {
+        data.empty_date = true;
+      } else {
+        data.empty_date = false;
+      }
     }
 
     if (this.validationSrvc.temperatureIsValid(data.temperature)) {

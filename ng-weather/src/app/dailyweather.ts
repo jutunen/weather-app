@@ -16,5 +16,6 @@ export interface WeatherData {
   valid_temperature: boolean,
   valid_rainfall: boolean,
   valid_wind_speed: boolean,
-  uniq_date: boolean
+  uniq_date: boolean,
+  empty_date: boolean
 }

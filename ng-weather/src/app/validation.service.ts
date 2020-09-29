@@ -27,10 +27,19 @@ export class ValidationService {
     return true;
   }
 
+  dateIsEmpty(date: string): boolean {
+    let value = date.match(/^\s*$/);
+    if (value === null) {
+      return false;
+    }
+    return true;
+  }
+
   dateIsValid(date: string): boolean {
     let day, month, year;
 
     if (typeof date === "undefined") {
+      console.log("*** DATE IS UNDEFINED!!! ***");
       return false;
     }
 
