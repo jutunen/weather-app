@@ -38,11 +38,6 @@ export class ValidationService {
   dateIsValid(date: string): boolean {
     let day, month, year;
 
-    if (typeof date === "undefined") {
-      console.log("*** DATE IS UNDEFINED!!! ***");
-      return false;
-    }
-
     let value = date.match(/^\s*(\d{1,2})\.(\d{1,2})\.(\d\d\d\d)\s*$/);
     if (value === null) {
       return false;
