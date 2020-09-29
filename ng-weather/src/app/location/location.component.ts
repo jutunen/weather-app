@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { RestService } from "../rest.service";
 import { StateService } from "../state.service";
-import { DailyWeather, WeatherData } from "../dailyweather";
+import { WeatherData } from "../dailyweather";
 
 @Component({
   selector: "app-location",
@@ -43,7 +43,8 @@ export class LocationComponent implements OnInit {
   getLocations(): void {
     this.stateService.showSpinner(true);
     this.restService.getLocations().subscribe((locations) => {
-      this.locations = locations;
+      // must filter due to strange dotnet mongodb driver bug:
+      this.locations = locations.filter((location) => location.length > 0);
       this.stateService.showSpinner(false);
       if (this.locations.length > 0) {
         this.stateService.setLocation(this.locations[0]);
@@ -69,17 +70,12 @@ export class LocationComponent implements OnInit {
   saveAll(event, location: string = ""): void {
     if (this.dataIsIntact) {
       // there is nothing to be saved
-      console.log("there is nothing to be saved!");
       if (event) {
-        console.log("setting new location: " + event.target.value);
         this.stateService.setLocation(event.target.value);
       } else if (location) {
-        console.log("adding new location: " + location);
         this.addLocation(location);
       }
       return;
-    } else {
-      console.log("Data has changed, going to save it!");
     }
 
     let keylessData = this.data.map((obj) => ({
@@ -97,10 +93,8 @@ export class LocationComponent implements OnInit {
         this.stateService.showSpinner(false);
         this.stateService.setDataAsIntact();
         if (event) {
-          console.log("setting new location: " + event.target.value);
           this.stateService.setLocation(event.target.value);
         } else if (location) {
-          console.log("adding new location: " + location);
           this.addLocation(location);
         }
       });
