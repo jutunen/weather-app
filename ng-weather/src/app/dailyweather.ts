@@ -1,10 +1,3 @@
-export interface DailyWeather {
-  temperature: number,
-  rainfall: number,
-  wind_speed: number,
-  location: string,
-  date: string
-}
 
 export interface WeatherData {
   key: number,
