@@ -4,9 +4,9 @@
 >
   <div
     class="duplicate_indicator"
-    [ngStyle]="!data.uniq_date && { display: 'flex' }"
+    [ngStyle]="(!data.uniq_date || !data.valid_date) && { display: 'flex' }"
   >
-    <= DUPLIKAATTI PVM
+    {{!data.uniq_date ? "Korjaa duplikaatti pvm!" : data.empty_date ? "Lisää puuttuva pvm!" : "Korjaa virheellinen pvm!"}}
   </div>
   <div
     class="row_sub w_date_width"

@@ -2,6 +2,7 @@
   display: flex;
   background-color: #d8ecf3;
   justify-content: center;
+  align-items: center;
   margin-top: 1px;
   margin-bottom: 1px;
   border: 1px solid darkgray;
@@ -11,15 +12,15 @@
 
 .duplicate_indicator {
   position: absolute;
-  /*display: flex;*/
   justify-content: flex-start;
   align-items: center;
-  width:180px;
+  width:220px;
   height: 35px;
   background-color: rgba(255,0,0,0.7);
   padding-left: 5px;
   font-weight: bold;
   display:none;
+  left: 130px;
 }
 
 .row_sub {
