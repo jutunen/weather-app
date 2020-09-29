@@ -18,16 +18,7 @@ namespace WeatherApi.Services
             var database = client.GetDatabase(settings.DatabaseName);
 
             _weathers = database.GetCollection<Weather>(settings.WeatherCollectionName);
-            this.StartAsync().Wait(); 
         }
-
-        public async Task StartAsync()
-        {
-            var options = new CreateIndexOptions() { Unique = true };
-            
-            var indexKeysDefinition = Builders<Weather>.IndexKeys.Ascending("location").Ascending("date");
-            await _weathers.Indexes.CreateOneAsync(new CreateIndexModel<Weather>(indexKeysDefinition, options));
-        }        
 
         public List<string> GetLocations() => 
             _weathers.Distinct<string>("location", FilterDefinition<Weather>.Empty).ToList();
