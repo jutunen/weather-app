@@ -15,9 +15,6 @@ export class StateService {
   private readonly _weatherData = new BehaviorSubject<WeatherData[]>([]);
   readonly weatherData$ = this._weatherData.asObservable();
 
-  private readonly _allDatesAreValid = new BehaviorSubject<boolean>(true);
-  readonly allDatesAreValid$ = this._allDatesAreValid.asObservable();
-
   private readonly _spinnerIsVisible = new BehaviorSubject<boolean>(false);
   readonly spinnerIsVisible$ = this._spinnerIsVisible.asObservable();
 
@@ -41,20 +38,8 @@ export class StateService {
   private _setData(data: WeatherData[]): void {
     this._assignKeys(data);
     this._validateData(data);
-    this._checkDatesValidity(data);
     this._dataIsIntact.next(false);
     this._weatherData.next(data);
-  }
-
-  private _checkDatesValidity(data: WeatherData[]): void {
-    let invalidDates = data.filter(
-      (obj) => obj.valid_date === false || obj.uniq_date === false
-    );
-    if (invalidDates.length > 0) {
-      this._allDatesAreValid.next(false);
-    } else {
-      this._allDatesAreValid.next(true);
-    }
   }
 
   setDataAsIntact(): void {

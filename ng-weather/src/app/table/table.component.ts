@@ -11,7 +11,6 @@ import { WeatherData } from "../dailyweather";
 export class TableComponent implements OnInit {
   location: string; //ngIf
   data: WeatherData[] = [];
-  //allDatesAreValid: boolean = false;
   dataLoaded: boolean = false; //ngIf
   dataIsIntact: boolean = false;
 
@@ -25,11 +24,6 @@ export class TableComponent implements OnInit {
       this.getServerData(location)
     );
     this.stateService.weatherData$.subscribe((data) => (this.data = data));
-    /*
-    this.stateService.allDatesAreValid$.subscribe(
-      (state) => (this.allDatesAreValid = state)
-    );
-    */
   }
 
   addNew(): void {

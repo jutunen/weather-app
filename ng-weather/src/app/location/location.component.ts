@@ -13,7 +13,6 @@ export class LocationComponent implements OnInit {
   selectedLocation: string;
   spinnerIsVisible: boolean = false;
   data: WeatherData[] = [];
-  //allDatesAreValid: boolean = false;
   dataIsIntact: boolean = false;
 
   constructor(
@@ -30,11 +29,6 @@ export class LocationComponent implements OnInit {
     );
     this.getLocations();
     this.stateService.weatherData$.subscribe((data) => (this.data = data));
-    /*
-    this.stateService.allDatesAreValid$.subscribe(
-      (state) => (this.allDatesAreValid = state)
-    );
-    */
     this.stateService.dataIsIntact$.subscribe(
       (state) => (this.dataIsIntact = state)
     );
@@ -109,12 +103,4 @@ export class LocationComponent implements OnInit {
       this.stateService.showSpinner(false);
     });
   }
-
-  /*
-  onLocationChange(): void {
-    console.log("onLocationChange: " + this.selectedLocation);
-    // TODO: saveAll first
-    this.stateService.setLocation(this.selectedLocation);
-  }
-*/
 }
