@@ -1,48 +1,64 @@
-<div *ngIf="data.length > 0" class="chart_date">
-  <div
-    class="radio_button_line"
-    [ngStyle]="singleDateChartSelected && { border: '2px solid gray' }"
-  >
-    <label class="label">
-      <input
-        type="radio"
-        value="1"
-        name="chart_type"
-        [(ngModel)]="singleDateChartSelected"
-        (ngModelChange)="onRadioChange()"
-      />
-      <span>Näytä yhden päivän graafi:</span>
-    </label>
-    <select [(ngModel)]="selectedDate" (change)="onSingleDateChange()">
-      <option disabled hidden value="undefined">Valitse pvm</option>
-      <option *ngFor="let date of dates" value="{{ date }}">{{ date }}</option>
-    </select>
+<div *ngIf="data.length > 0" id="top_container">
+  <div id="chart_date_selectors">
+    <div
+      class="radio_button_line"
+      [ngStyle]="singleDateChartSelected && { border: '2px solid gray' }"
+    >
+      <label class="label">
+        <input
+          type="radio"
+          value="1"
+          name="chart_type"
+          [(ngModel)]="singleDateChartSelected"
+          (ngModelChange)="onRadioChange()"
+        />
+        <span>Näytä yhden päivän graafi:</span>
+      </label>
+      <select [(ngModel)]="selectedDate" (change)="onSingleDateChange()">
+        <option disabled hidden value="undefined">Valitse pvm</option>
+        <option *ngFor="let date of dates" value="{{ date }}">{{
+          date
+        }}</option>
+      </select>
+    </div>
+    <div
+      class="radio_button_line"
+      [ngStyle]="!singleDateChartSelected && { border: '2px solid gray' }"
+    >
+      <label class="label">
+        <input
+          type="radio"
+          value=""
+          name="chart_type"
+          [(ngModel)]="singleDateChartSelected"
+          (ngModelChange)="onRadioChange()"
+        />
+        <span>Näytä aikajakson graafi:</span>
+      </label>
+      <select [(ngModel)]="selectedDate_1" (change)="onDateSpanChange()">
+        <option disabled hidden value="undefined">Valitse pvm</option>
+        <option *ngFor="let date of dates" value="{{ date }}">{{
+          date
+        }}</option>
+      </select>
+      <span class="hyphen">
+        -
+      </span>
+      <select [(ngModel)]="selectedDate_2" (change)="onDateSpanChange()">
+        <option disabled hidden value="undefined">Valitse pvm</option>
+        <option *ngFor="let date of dates" value="{{ date }}">{{
+          date
+        }}</option>
+      </select>
+    </div>
   </div>
-  <div
-    class="radio_button_line"
-    [ngStyle]="!singleDateChartSelected && { border: '2px solid gray' }"
-  >
-    <label class="label">
-      <input
-        type="radio"
-        value=""
-        name="chart_type"
-        [(ngModel)]="singleDateChartSelected"
-        (ngModelChange)="onRadioChange()"
-      />
-      <span>Näytä aikajakson graafi:</span>
-    </label>
-    <select [(ngModel)]="selectedDate_1" (change)="onDateSpanChange()">
-      <option disabled hidden value="undefined">Valitse pvm</option>
-      <option *ngFor="let date of dates" value="{{ date }}">{{ date }}</option>
-    </select>
-    <span class="hyphen">
-      -
-    </span>
-    <select [(ngModel)]="selectedDate_2" (change)="onDateSpanChange()">
-      <option disabled hidden value="undefined">Valitse pvm</option>
-      <option *ngFor="let date of dates" value="{{ date }}">{{ date }}</option>
-    </select>
+  <div id="chart_title_container">
+    {{ location }}
+    {{
+      singleDateChartSelected
+        ? (selectedDate | formatDate)
+        : (selectedDate_1 | formatDate) + " - " + (selectedDate_2 | formatDate)
+    }}
   </div>
 </div>
 

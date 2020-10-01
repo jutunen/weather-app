@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { HeadingComponent } from './heading/heading.component';
 import { LocationComponent } from './location/location.component';
 import { ChartsComponent } from './charts/charts.component';
+import { FormatDatePipe } from './charts/charts.component';
 import { TableComponent } from './table/table.component';
 import { TableRowComponent } from './table-row/table-row.component';
 
@@ -20,7 +21,8 @@ import { TableRowComponent } from './table-row/table-row.component';
     LocationComponent,
     ChartsComponent,
     TableComponent,
-    TableRowComponent
+    TableRowComponent,
+    FormatDatePipe
   ],
   imports: [
     HttpClientModule,

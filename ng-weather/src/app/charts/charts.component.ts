@@ -4,6 +4,7 @@ import { WeatherData } from "../dailyweather";
 import { Chart, ChartOptions, ChartType, ChartDataSets } from "chart.js";
 import * as pluginDataLabels from "chartjs-plugin-datalabels";
 import { Color, BaseChartDirective, Label } from "ng2-charts";
+import { Pipe, PipeTransform } from '@angular/core';
 
 @Component({
   selector: "app-charts",
@@ -18,6 +19,7 @@ export class ChartsComponent implements OnInit {
   selectedDate_1: string = "";
   selectedDate_2: string = "";
   dates: string[];
+  location: string = "";
 
   public barChartOptions: ChartOptions = {
     layout: {
@@ -65,7 +67,6 @@ export class ChartsComponent implements OnInit {
     responsive: true,
     maintainAspectRatio: false,
     scales: {
-      // We use this empty structure as a placeholder for dynamic theming.
       xAxes: [{}],
       yAxes: [
         {
@@ -122,6 +123,8 @@ export class ChartsComponent implements OnInit {
       this.selectedDate_2 = "";
       this.lineChartData = [];
       this.barChartData = [];
+      this.location = location;
+      this.data = [];
     });
   }
 
@@ -258,4 +261,12 @@ export class ChartsComponent implements OnInit {
     return Number(year + month + day);
   }
 
+}
+
+@Pipe({name: 'formatDate'})
+export class FormatDatePipe implements PipeTransform {
+  transform(date: string): string {
+    let [day, month, year] = date.split(".");
+    return Number(day) + "." + Number(month) + "." + year;
+  }
 }
