@@ -3,7 +3,7 @@
   [ngClass]="{ redborder: del_button_hover === 0 ? false : true }"
 >
   <div
-    class="duplicate_indicator"
+    class="invalid_date_indicator"
     [ngStyle]="(!data.uniq_date || !data.valid_date) && { display: 'flex' }"
   >
     {{!data.uniq_date ? "Korjaa duplikaatti pvm!" : data.empty_date ? "Lisää puuttuva pvm!" : "Korjaa virheellinen pvm!"}}
