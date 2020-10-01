@@ -65,13 +65,14 @@ export class LocationComponent implements OnInit {
     });
   }
 
-  saveAll(event, location: string = ""): void {
+  // this handles also setLocation and addLocation functions:
+  saveAll(selectedLocation: string, newLocation: string): void {
     if (this.dataIsIntact) {
       // there is nothing to be saved
-      if (event) {
-        this.stateService.setLocation(event.target.value);
-      } else if (location) {
-        this.addLocation(location);
+      if (selectedLocation) {
+        this.stateService.setLocation(selectedLocation);
+      } else if (newLocation) {
+        this.addLocation(newLocation);
       }
       return;
     }
@@ -89,11 +90,13 @@ export class LocationComponent implements OnInit {
       .saveAll(this.selectedLocation, (strippedData as unknown) as WeatherData[])
       .subscribe((response) => {
         this.stateService.showSpinner(false);
-        this.stateService.setDataAsIntact();
-        if (event) {
-          this.stateService.setLocation(event.target.value);
-        } else if (location) {
-          this.addLocation(location);
+        if(response !== NETWORK_ERROR) {
+          this.stateService.setDataAsIntact();
+        }
+        if (selectedLocation) {
+          this.stateService.setLocation(selectedLocation);
+        } else if (newLocation) {
+          this.addLocation(newLocation);
         }
       });
   }

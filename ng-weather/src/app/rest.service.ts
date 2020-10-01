@@ -62,7 +62,7 @@ export class RestService {
         { location: location, data: data },
         this.httpOptions
       )
-      .pipe(catchError(this.handleError<string>("Tietojen tallennus", "")));
+      .pipe(catchError(this.handleError<string>("Tietojen tallennus", NETWORK_ERROR)));
   }
 
   private handleError<T>(operation = "operation", result?: T) {

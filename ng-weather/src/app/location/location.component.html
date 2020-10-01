@@ -8,7 +8,7 @@
 
 <div class="location">
   <label>Valitse paikkakunta:</label>
-  <select [ngModel]="selectedLocation" (change)="saveAll($event)">
+  <select [ngModel]="selectedLocation" (change)="saveAll($event.target.value)">
     <option *ngFor="let loc of locations" value="{{ loc }}">{{ loc }}</option>
   </select>
 </div>
