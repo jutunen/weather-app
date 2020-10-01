@@ -20,7 +20,8 @@ export class RestService {
   getDataUrl = "http://127.0.0.1:5000/data/";
   addDataUrl = "http://127.0.0.1:5000/data/save";
 
-  /*
+
+/*
   getLocUrl = 'https://jussin.site/wthr/location/all';
   addLocUrl = 'https://jussin.site/wthr/location/new';
   delLocUrl = 'https://jussin.site/wthr/location/';
@@ -39,7 +40,7 @@ export class RestService {
 
     return this.http
       .post<string>(this.addLocUrl, params, this.httpOptions)
-      .pipe(catchError(this.handleError<string>("Paikkakunnan lisäys", "")));
+      .pipe(catchError(this.handleError<string>("Paikkakunnan lisäys", null)));
   }
 
   deleteLocation(location: string): Observable<string> {
@@ -51,7 +52,7 @@ export class RestService {
   getLocationData(location: string): Observable<[]> {
     return this.http
       .get<[]>(this.getDataUrl + location)
-      .pipe(catchError(this.handleError<[]>("Säätietojen haku", [])));
+      .pipe(catchError(this.handleError<[]>("Säätietojen haku", null)));
   }
 
   saveAll(location: string, data: WeatherData[]): Observable<string> {
@@ -68,6 +69,7 @@ export class RestService {
     return (error: any): Observable<T> => {
       //console.error(error); // log to console instead
       //console.log(`${operation} failed: ${error.message}`);
+
       alert(`${operation} epäonnistui. Yritä myöhemmin uudelleen.`);
 
       // Let the app keep running by returning an empty result.

@@ -54,10 +54,14 @@ export class LocationComponent implements OnInit {
     }
     this.stateService.showSpinner(true);
     this.restService.addLocation(name).subscribe((loc) => {
+      this.stateService.showSpinner(false);
+      if(loc === null) {
+        // POST operation failed
+        return;
+      }
       this.locations.push(name);
       this.locations = [...new Set(this.locations)];
       this.stateService.setLocation(name);
-      this.stateService.showSpinner(false);
     });
   }
 

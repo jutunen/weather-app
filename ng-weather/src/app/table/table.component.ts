@@ -39,6 +39,13 @@ export class TableComponent implements OnInit {
       this.stateService.showSpinner(true);
       this.restService.getLocationData(location).subscribe((data) => {
         this.stateService.showSpinner(false);
+        if(data === null) {
+          // GET operation failed
+          this.data = [];
+          this.dataLoaded = false;
+          this.stateService.setLocation("");
+          return;
+        }
         this.stateService.setData(data);
         this.stateService.sortRows();
         this.stateService.setDataAsIntact();
