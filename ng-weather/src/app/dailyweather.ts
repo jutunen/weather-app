@@ -12,3 +12,5 @@ export interface WeatherData {
   uniq_date: boolean,
   empty_date: boolean
 }
+
+export const NETWORK_ERROR: string = "network_error";

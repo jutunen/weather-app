@@ -53,6 +53,7 @@ export class TableComponent implements OnInit {
       });
     } else {
       this.data = [];
+      this.dataLoaded = false;
     }
   }
 }

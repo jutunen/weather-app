@@ -76,7 +76,7 @@ export class LocationComponent implements OnInit {
       return;
     }
 
-    let keylessData = this.data.map((obj) => ({
+    let strippedData = this.data.map((obj) => ({
       rainfall: Number(obj.rainfall),
       date: obj.date,
       wind_speed: Number(obj.wind_speed),
@@ -86,7 +86,7 @@ export class LocationComponent implements OnInit {
     this.stateService.showSpinner(true);
 
     this.restService
-      .saveAll(this.selectedLocation, (keylessData as unknown) as WeatherData[])
+      .saveAll(this.selectedLocation, (strippedData as unknown) as WeatherData[])
       .subscribe((response) => {
         this.stateService.showSpinner(false);
         this.stateService.setDataAsIntact();
