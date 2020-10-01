@@ -1,10 +1,15 @@
 import { Component, OnInit } from "@angular/core";
 import { StateService } from "../state.service";
-import { WeatherData } from "../dailyweather";
+import {
+  WeatherData,
+  LINECHART_COLORS,
+  BARCHART_OPTIONS,
+  LINECHART_OPTIONS,
+} from "../dailyweather";
 import { Chart, ChartOptions, ChartType, ChartDataSets } from "chart.js";
 import * as pluginDataLabels from "chartjs-plugin-datalabels";
 import { Color, BaseChartDirective, Label } from "ng2-charts";
-import { Pipe, PipeTransform } from '@angular/core';
+import { Pipe, PipeTransform } from "@angular/core";
 
 @Component({
   selector: "app-charts",
@@ -21,34 +26,7 @@ export class ChartsComponent implements OnInit {
   dates: string[];
   location: string = "";
 
-  public barChartOptions: ChartOptions = {
-    layout: {
-      padding: {
-        left: 0,
-        right: 0,
-        top: 20,
-        bottom: 0,
-      },
-    },
-    //legend: { labels: { fontSize: 6 }},
-    animation: { duration: 0 },
-    title: { fontSize: 20 },
-    responsive: true,
-    maintainAspectRatio: false,
-    scales: {
-      xAxes: [{ ticks: { fontSize: 16 } }],
-      yAxes: [{ ticks: { beginAtZero: true, fontSize: 16 } }],
-    },
-    plugins: {
-      datalabels: {
-        offset: -6,
-        color: "black",
-        anchor: "end",
-        align: "top",
-        font: { size: 16 },
-      },
-    },
-  };
+  public barChartOptions: ChartOptions = BARCHART_OPTIONS;
   public barChartLabels: Label[] = [
     "lämpötila \u00B0C",
     "sademäärä mm/vrk",
@@ -61,52 +39,8 @@ export class ChartsComponent implements OnInit {
 
   public lineChartData: ChartDataSets[] = [];
   public lineChartLabels: Label[] = [];
-  public lineChartOptions: ChartOptions = {
-    legend: { labels: { fontSize: 16 } },
-    animation: { duration: 0 },
-    responsive: true,
-    maintainAspectRatio: false,
-    scales: {
-      xAxes: [{}],
-      yAxes: [
-        {
-          id: "y-axis-0",
-          position: "left",
-        },
-      ],
-    },
-  };
-
-  public lineChartColors: Color[] = [
-    {
-      // red
-      backgroundColor: "rgba(255,0,0,0.7)",
-      borderColor: "red",
-      pointBackgroundColor: "rgba(148,159,177,1)",
-      pointBorderColor: "#fff",
-      pointHoverBackgroundColor: "#fff",
-      pointHoverBorderColor: "rgba(148,159,177,0.8)",
-    },
-    {
-      // green
-      backgroundColor: "rgba(0,255,0,0.7)",
-      borderColor: "green",
-      pointBackgroundColor: "rgba(77,83,96,1)",
-      pointBorderColor: "#fff",
-      pointHoverBackgroundColor: "#fff",
-      pointHoverBorderColor: "rgba(77,83,96,1)",
-    },
-    {
-      // blue
-      backgroundColor: "rgba(0,0,255,0.7)",
-      borderColor: "blue",
-      pointBackgroundColor: "rgba(148,159,177,1)",
-      pointBorderColor: "#fff",
-      pointHoverBackgroundColor: "#fff",
-      pointHoverBorderColor: "rgba(148,159,177,0.8)",
-    },
-  ];
-
+  public lineChartOptions: ChartOptions = LINECHART_OPTIONS;
+  public lineChartColors: Color[] = LINECHART_COLORS;
   public lineChartLegend = true;
   public lineChartType: ChartType = "line";
 
@@ -260,12 +194,12 @@ export class ChartsComponent implements OnInit {
     let [day, month, year] = date.split(".");
     return Number(year + month + day);
   }
-
 }
 
-@Pipe({name: 'formatDate'})
+@Pipe({ name: "formatDate" })
 export class FormatDatePipe implements PipeTransform {
   transform(date: string): string {
+    if (!date) { return ""; }
     let [day, month, year] = date.split(".");
     return Number(day) + "." + Number(month) + "." + year;
   }
