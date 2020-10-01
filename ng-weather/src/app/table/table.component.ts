@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { RestService } from "../rest.service";
 import { StateService } from "../state.service";
-import { WeatherData } from "../dailyweather";
+import { WeatherData, NETWORK_ERROR } from "../dailyweather";
 
 @Component({
   selector: "app-table",
@@ -39,7 +39,7 @@ export class TableComponent implements OnInit {
       this.stateService.showSpinner(true);
       this.restService.getLocationData(location).subscribe((data) => {
         this.stateService.showSpinner(false);
-        if(data === null) {
+        if(data === NETWORK_ERROR) {
           // GET operation failed
           this.data = [];
           this.dataLoaded = false;

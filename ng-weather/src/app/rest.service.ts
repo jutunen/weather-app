@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable, of } from "rxjs";
 import { catchError } from "rxjs/operators";
-import { WeatherData } from "./dailyweather";
+import { WeatherData, NETWORK_ERROR } from "./dailyweather";
 
 @Injectable({
   providedIn: "root",
@@ -40,19 +40,19 @@ export class RestService {
 
     return this.http
       .post<string>(this.addLocUrl, params, this.httpOptions)
-      .pipe(catchError(this.handleError<string>("Paikkakunnan lisäys", null)));
+      .pipe(catchError(this.handleError<string>("Paikkakunnan lisäys", NETWORK_ERROR)));
   }
 
   deleteLocation(location: string): Observable<string> {
     return this.http
       .delete<string>(this.delLocUrl + location, this.httpOptions)
-      .pipe(catchError(this.handleError<string>("Paikkakunnan poisto", "")));
+      .pipe(catchError(this.handleError<string>("Paikkakunnan poisto", NETWORK_ERROR)));
   }
 
-  getLocationData(location: string): Observable<[]> {
+  getLocationData(location: string): Observable<any> {
     return this.http
-      .get<[]>(this.getDataUrl + location)
-      .pipe(catchError(this.handleError<[]>("Säätietojen haku", null)));
+      .get<any>(this.getDataUrl + location)
+      .pipe(catchError(this.handleError<any>("Säätietojen haku", NETWORK_ERROR)));
   }
 
   saveAll(location: string, data: WeatherData[]): Observable<string> {

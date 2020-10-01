@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { RestService } from "../rest.service";
 import { StateService } from "../state.service";
-import { WeatherData } from "../dailyweather";
+import { WeatherData, NETWORK_ERROR } from "../dailyweather";
 
 @Component({
   selector: "app-location",
@@ -55,7 +55,7 @@ export class LocationComponent implements OnInit {
     this.stateService.showSpinner(true);
     this.restService.addLocation(name).subscribe((loc) => {
       this.stateService.showSpinner(false);
-      if(loc === null) {
+      if(loc === NETWORK_ERROR) {
         // POST operation failed
         return;
       }
@@ -101,10 +101,14 @@ export class LocationComponent implements OnInit {
   deleteLocation(name: string): void {
     this.stateService.showSpinner(true);
     this.restService.deleteLocation(name).subscribe((val) => {
+      this.stateService.showSpinner(false);
+      if(val === NETWORK_ERROR) {
+        // DELETE operation failed
+        return;
+      }
       this.locations = this.locations.filter((loc) => loc !== name);
       this.stateService.setData([]);
       this.stateService.setLocation("");
-      this.stateService.showSpinner(false);
     });
   }
 }
