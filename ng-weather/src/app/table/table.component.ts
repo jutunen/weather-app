@@ -9,7 +9,6 @@ import { WeatherData } from "../dailyweather";
   styleUrls: ["./table.component.css"],
 })
 export class TableComponent implements OnInit {
-  location: string; //ngIf
   data: WeatherData[] = [];
   dataLoaded: boolean = false; //ngIf
   dataIsIntact: boolean = false;
@@ -38,7 +37,6 @@ export class TableComponent implements OnInit {
     if (location) {
       this.dataLoaded = false;
       this.stateService.showSpinner(true);
-      this.location = location;
       this.restService.getLocationData(location).subscribe((data) => {
         this.stateService.showSpinner(false);
         this.stateService.setData(data);
@@ -48,7 +46,6 @@ export class TableComponent implements OnInit {
       });
     } else {
       this.data = [];
-      this.location = location;
     }
   }
 }
