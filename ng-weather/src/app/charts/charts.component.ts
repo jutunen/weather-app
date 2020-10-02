@@ -5,6 +5,7 @@ import {
   LINECHART_COLORS,
   BARCHART_OPTIONS,
   LINECHART_OPTIONS,
+  SelectedDates
 } from "../dailyweather";
 import { Chart, ChartOptions, ChartType, ChartDataSets } from "chart.js";
 import * as pluginDataLabels from "chartjs-plugin-datalabels";
@@ -21,11 +22,14 @@ export class ChartsComponent implements OnInit {
   data: WeatherData[] = [];
 
   singleDateChartSelected: string = "1";
-  selectedDate: string = "";
-  selectedDate_1: string = "";
-  selectedDate_2: string = "";
   dates: string[];
   location: string = "";
+
+  selected = <SelectedDates>{
+    Date: "", // single date
+    Date_1: "", // date span first
+    Date_2: "" // date span second
+  };
 
   public barChartOptions: ChartOptions = BARCHART_OPTIONS;
   public barChartLabels: Label[] = [
@@ -53,9 +57,9 @@ export class ChartsComponent implements OnInit {
       this.getDates();
     });
     this.stateService.location$.subscribe((location) => {
-      this.selectedDate = "";
-      this.selectedDate_1 = "";
-      this.selectedDate_2 = "";
+      this.selected.Date = "";
+      this.selected.Date_1 = "";
+      this.selected.Date_2 = "";
       this.lineChartData = [];
       this.barChartData = [];
       this.location = location;
@@ -85,15 +89,15 @@ export class ChartsComponent implements OnInit {
 
     if (
       this.dates.length > 1 &&
-      this.selectedDate_1 === "" &&
-      this.selectedDate_2 === ""
+      this.selected.Date_1 === "" &&
+      this.selected.Date_2 === ""
     ) {
-      this.selectedDate_1 = this.dates[0];
-      this.selectedDate_2 = this.dates[this.dates.length - 1];
+      this.selected.Date_1 = this.dates[0];
+      this.selected.Date_2 = this.dates[this.dates.length - 1];
     }
 
-    if (this.dates.length > 0 && this.selectedDate === "") {
-      this.selectedDate = this.dates[0];
+    if (this.dates.length > 0 && this.selected.Date === "") {
+      this.selected.Date = this.dates[0];
     }
 
     if (this.singleDateChartSelected) {
@@ -118,15 +122,15 @@ export class ChartsComponent implements OnInit {
 
   onDateSpanChange(): void {
     if (
-      !this.dates.find((date) => date === this.selectedDate_1) ||
-      !this.dates.find((date) => date === this.selectedDate_2)
+      !this.dates.find((date) => date === this.selected.Date_1) ||
+      !this.dates.find((date) => date === this.selected.Date_2)
     ) {
       this.lineChartData = [];
       return;
     }
 
-    if (this.selectedDate_1 && this.selectedDate_2) {
-      let data = this.getDateSpanData(this.selectedDate_1, this.selectedDate_2);
+    if (this.selected.Date_1 && this.selected.Date_2) {
+      let data = this.getDateSpanData(this.selected.Date_1, this.selected.Date_2);
       this.setLineChart(data);
       this.singleDateChartSelected = "";
       this.barChartData = [];
@@ -163,13 +167,13 @@ export class ChartsComponent implements OnInit {
   }
 
   onSingleDateChange(): void {
-    if (!this.dates.find((date) => date === this.selectedDate)) {
+    if (!this.dates.find((date) => date === this.selected.Date)) {
       this.barChartData = [];
       return;
     }
 
-    if (this.selectedDate) {
-      let data = this.data.find((obj) => obj.date === this.selectedDate);
+    if (this.selected.Date) {
+      let data = this.data.find((obj) => obj.date === this.selected.Date);
       this.setChart(data);
       this.singleDateChartSelected = "1";
       this.lineChartData = [];
@@ -196,22 +200,31 @@ export class ChartsComponent implements OnInit {
     return Number(year + month + day);
   }
 
-  prevDateSingle(): void {
-    if(this.selectedDate) {
-      let currentIndex = this.dates.indexOf(this.selectedDate);
+  prevDate(param): void {
+    if(this.selected[param]) {
+      let currentIndex = this.dates.indexOf(this.selected[param]);
       if(currentIndex > 0) {
-        this.selectedDate = this.dates[--currentIndex];
-        this.onSingleDateChange();
+        this.selected[param] = this.dates[--currentIndex];
+        if(param === 'Date') {
+          this.onSingleDateChange();
+        } else {
+          this.onDateSpanChange();
+        }
       }
     }
   }
 
-  nextDateSingle(): void {
-    if(this.selectedDate) {
-      let currentIndex = this.dates.indexOf(this.selectedDate);
+  nextDate(param): void {
+    if(this.selected[param]) {
+      let currentIndex = this.dates.indexOf(this.selected[param]);
+      if(currentIndex < 0) { return };
       if(currentIndex < this.dates.length - 1) {
-        this.selectedDate = this.dates[++currentIndex];
-        this.onSingleDateChange();
+        this.selected[param] = this.dates[++currentIndex];
+        if(param === 'Date') {
+          this.onSingleDateChange();
+        } else {
+          this.onDateSpanChange();
+        }
       }
     }
   }

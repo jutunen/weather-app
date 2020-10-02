@@ -6,7 +6,7 @@
 }
 
 .date_switch_arrow {
-  width: 30px;
+  width: 25px;
 }
 
 .date_switch_arrow:hover {
@@ -19,20 +19,21 @@
 }
 
 #chart_date_selectors {
-  width: 500px;
+  width: 550px;
 }
 
 #chart_title_container {
-  width: calc(100% - 500px);
+  width: calc(100% - 550px);
   display:flex;
   justify-content: center;
   align-items: center;
   font-size: 18px;
   color: #6f7171;
+  text-align: center;
 }
 
 .radio_button_line {
-  width: 470px;
+  width: 550px;
   height: 40px;
   display: flex;
   justify-content: flex-start;
@@ -58,7 +59,7 @@ input[type="radio"] {
   text-decoration: underline;
 }
 
-@media only screen and (max-width: 1200px) {
+@media only screen and (max-width: 1300px) {
 
   #chart_title_container {
     display: none;

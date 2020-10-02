@@ -16,14 +16,14 @@
       </label>
       <wc-arrow
         class="date_switch_arrow"
-        l="25"
-        w="25"
+        l="22"
+        w="22"
         rot="180"
         tail-l="0"
-        (click)="prevDateSingle()"
+        (click)="prevDate('Date')"
       >
       </wc-arrow>
-      <select [(ngModel)]="selectedDate" (change)="onSingleDateChange()">
+      <select [(ngModel)]="selected.Date" (change)="onSingleDateChange()">
         <option disabled hidden value="undefined">Valitse pvm</option>
         <option *ngFor="let date of dates" value="{{ date }}">{{
           date
@@ -31,10 +31,10 @@
       </select>
       <wc-arrow
         class="date_switch_arrow"
-        l="25"
-        w="25"
+        l="22"
+        w="22"
         tail-l="0"
-        (click)="nextDateSingle()"
+        (click)="nextDate('Date')"
       >
       </wc-arrow>
     </div>
@@ -52,29 +52,64 @@
         />
         <span>Näytä aikajakson graafi:</span>
       </label>
-      <select [(ngModel)]="selectedDate_1" (change)="onDateSpanChange()">
+      <wc-arrow
+        class="date_switch_arrow"
+        l="22"
+        w="22"
+        rot="180"
+        tail-l="0"
+        (click)="prevDate('Date_1')"
+      >
+      </wc-arrow>
+      <select [(ngModel)]="selected.Date_1" (change)="onDateSpanChange()">
         <option disabled hidden value="undefined">Valitse pvm</option>
         <option *ngFor="let date of dates" value="{{ date }}">{{
           date
         }}</option>
       </select>
+      <wc-arrow
+        class="date_switch_arrow"
+        l="22"
+        w="22"
+        tail-l="0"
+        (click)="nextDate('Date_1')"
+      >
+      </wc-arrow>
       <span class="hyphen">
         -
       </span>
-      <select [(ngModel)]="selectedDate_2" (change)="onDateSpanChange()">
+      <wc-arrow
+        class="date_switch_arrow"
+        l="22"
+        w="22"
+        rot="180"
+        tail-l="0"
+        (click)="prevDate('Date_2')"
+      >
+      </wc-arrow>
+      <select [(ngModel)]="selected.Date_2" (change)="onDateSpanChange()">
         <option disabled hidden value="undefined">Valitse pvm</option>
         <option *ngFor="let date of dates" value="{{ date }}">{{
           date
         }}</option>
       </select>
+      <wc-arrow
+        class="date_switch_arrow"
+        l="22"
+        w="22"
+        tail-l="0"
+        (click)="nextDate('Date_2')"
+      >
+      </wc-arrow>
     </div>
   </div>
   <div id="chart_title_container">
     {{ location }}
+    <br/>
     {{
       singleDateChartSelected
-        ? (selectedDate | formatDate)
-        : (selectedDate_1 | formatDate) + " - " + (selectedDate_2 | formatDate)
+        ? (selected.Date | formatDate)
+        : (selected.Date_1 | formatDate) + " - " + (selected.Date_2 | formatDate)
     }}
   </div>
 </div>

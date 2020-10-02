@@ -15,6 +15,12 @@ export interface WeatherData {
   empty_date: boolean
 }
 
+export interface SelectedDates {
+  Date: string,
+  Date_1: string,
+  Date_2: string
+}
+
 export const NETWORK_ERROR: string = "network_error";
 
 export const LINECHART_COLORS: Color[] = [
