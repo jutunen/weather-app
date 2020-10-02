@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { WeatherData } from "../dailyweather";
 import { StateService } from "../state.service";
+import '@vanillawc/wc-arrow'
 
 @Component({
   selector: "app-table-row",

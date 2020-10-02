@@ -2,12 +2,19 @@
   class="row_main w_table_width"
   [ngClass]="{ redborder: del_button_hover === 0 ? false : true }"
 >
-  <div
-    class="invalid_date_indicator"
+  <wc-arrow
     [ngStyle]="(!data.uniq_date || !data.valid_date) && { display: 'flex' }"
+    class="custom-arrow"
+    l="250"
+    w="30"
+    rot="180"
+    tail-l="90"
+    tail-w="100"
   >
-    {{!data.uniq_date ? "Korjaa duplikaatti pvm!" : data.empty_date ? "Lisää puuttuva pvm!" : "Korjaa virheellinen pvm!"}}
-  </div>
+    <span class="custom_arrow_text">
+      {{!data.uniq_date ? "Korjaa duplikaatti pvm!" : data.empty_date ? "Lisää puuttuva pvm!" : "Korjaa virheellinen pvm!"}}
+    </span>
+  </wc-arrow>
   <div
     class="row_sub w_date_width"
     [ngClass]="{ redbackground: data.valid_date === true ? false : true }"
