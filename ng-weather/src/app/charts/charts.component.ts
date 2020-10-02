@@ -10,6 +10,7 @@ import { Chart, ChartOptions, ChartType, ChartDataSets } from "chart.js";
 import * as pluginDataLabels from "chartjs-plugin-datalabels";
 import { Color, BaseChartDirective, Label } from "ng2-charts";
 import { Pipe, PipeTransform } from "@angular/core";
+import '@vanillawc/wc-arrow'
 
 @Component({
   selector: "app-charts",
@@ -193,6 +194,26 @@ export class ChartsComponent implements OnInit {
   dToI(date: string): number {
     let [day, month, year] = date.split(".");
     return Number(year + month + day);
+  }
+
+  prevDateSingle(): void {
+    if(this.selectedDate) {
+      let currentIndex = this.dates.indexOf(this.selectedDate);
+      if(currentIndex > 0) {
+        this.selectedDate = this.dates[--currentIndex];
+        this.onSingleDateChange();
+      }
+    }
+  }
+
+  nextDateSingle(): void {
+    if(this.selectedDate) {
+      let currentIndex = this.dates.indexOf(this.selectedDate);
+      if(currentIndex < this.dates.length - 1) {
+        this.selectedDate = this.dates[++currentIndex];
+        this.onSingleDateChange();
+      }
+    }
   }
 }
 

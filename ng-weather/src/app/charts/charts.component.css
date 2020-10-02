@@ -5,6 +5,15 @@
   position: relative;
 }
 
+.date_switch_arrow {
+  width: 30px;
+}
+
+.date_switch_arrow:hover {
+  cursor: pointer;
+  fill: white;
+}
+
 #top_container {
   display: flex;
 }

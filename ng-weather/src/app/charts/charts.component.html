@@ -14,12 +14,29 @@
         />
         <span>Näytä yhden päivän graafi:</span>
       </label>
+      <wc-arrow
+        class="date_switch_arrow"
+        l="25"
+        w="25"
+        rot="180"
+        tail-l="0"
+        (click)="prevDateSingle()"
+      >
+      </wc-arrow>
       <select [(ngModel)]="selectedDate" (change)="onSingleDateChange()">
         <option disabled hidden value="undefined">Valitse pvm</option>
         <option *ngFor="let date of dates" value="{{ date }}">{{
           date
         }}</option>
       </select>
+      <wc-arrow
+        class="date_switch_arrow"
+        l="25"
+        w="25"
+        tail-l="0"
+        (click)="nextDateSingle()"
+      >
+      </wc-arrow>
     </div>
     <div
       class="radio_button_line"
