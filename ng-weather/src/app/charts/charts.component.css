@@ -19,11 +19,11 @@
 }
 
 #chart_date_selectors {
-  width: 550px;
+  width: 560px;
 }
 
 #chart_title_container {
-  width: calc(100% - 550px);
+  width: calc(100% - 560px);
   display:flex;
   justify-content: center;
   align-items: center;
@@ -33,7 +33,7 @@
 }
 
 .radio_button_line {
-  width: 550px;
+  width: 560px;
   height: 40px;
   display: flex;
   justify-content: flex-start;
