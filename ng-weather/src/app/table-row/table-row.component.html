@@ -19,22 +19,22 @@
     class="row_sub w_date_width"
     [ngClass]="{ redbackground: data.valid_date === true ? false : true }"
   >
+    <wc-datepicker #picker ignore-on-focus show-close-icon>
     <input
       [ngModel]="data.date"
       (keyup.enter)="updateDate($event)"
-      (blur)="updateDate($event)"
+      (change)="updateDate($event)"
+      (dateselect)="updateDate($event)"
       placeholder="pp.kk.vvvv"
       type="text"
       class="date_input"
       maxlength="12"
     />
+    </wc-datepicker>
+
     <div
-      ngDefaultControl
       id="calendar_button"
-      (ngModelChange)="updateDatepickerDate($event)"
-      [ngModel]="data.date"
-      [dpDayPicker]="datepicker_config"
-      theme="dp-material"
+      (click)="picker.setFocusOnCal()"
     >
       <span [innerHTML]="calendar_icon"></span>
     </div>

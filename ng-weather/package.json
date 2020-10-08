@@ -23,7 +23,6 @@
     "chart.js": "^2.9.3",
     "chartjs-plugin-datalabels": "^0.7.0",
     "ng2-charts": "^2.4.2",
-    "ng2-date-picker": "^10.0.0",
     "ng2-tooltip-directive": "^2.9.22",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",
