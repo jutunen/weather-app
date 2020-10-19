@@ -1,0 +1,13 @@
+version: '3'
+services:
+  app:
+    container_name: weather
+    restart: always
+    build: .
+    ports:
+      - '5000:5000'
+    links:
+      - mongou
+  mongou:
+    container_name: mongou
+    image: mongo
