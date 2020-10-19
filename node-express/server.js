@@ -9,14 +9,16 @@ import {
   getLocationData,
   addLocation,
   saveAll,
-  deleteLocation
+  deleteLocation,
+  kaikkiVex
  } from "./functions.js";
 
 const PORT_NUMBER = 5000;
 
 async function connectMongoose() {
     //await mongoose.connect("mongodb://user_1:user_1@localhost/banking-mongoose", {
-    await mongoose.connect("mongodb://user_1:user_1@localhost/banking", {
+    await mongoose.connect("mongodb://mongou:27017/weather", {
+    //await mongoose.connect("mongodb://user_1:user_1@localhost/banking", {
         useNewUrlParser: true,
         useUnifiedTopology: true
     });
@@ -47,6 +49,10 @@ app.post("/data/save", (req, res) => {
 
 app.delete("/location/:location", (req, res) => {
     deleteLocation(req, res);
+});
+
+app.post("/data/kaikkivex", (req, res) => {
+    kaikkiVex(req, res);
 });
 
 console.log("Listening port " + PORT_NUMBER);

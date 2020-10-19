@@ -102,3 +102,25 @@ export async function addLocation(req, res) {
 
   res.status(200).send("");
 }
+
+export async function kaikkiVex(req, res) {
+
+  const password = req.body.password;
+
+  if(password !== 'salanasa') {
+    res.status(401).send("");
+    return;
+  }
+
+  let results;
+
+  try {
+    results = await WeatherData.deleteMany();
+  } catch(error) {
+    console.log(error);
+    res.status(500).send();
+    return;
+  }
+
+  res.status(200).send("");
+}
