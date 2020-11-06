@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { DpDatePickerModule } from 'ng2-date-picker';
 import { ChartsModule } from 'ng2-charts';
 import { TooltipModule } from 'ng2-tooltip-directive';
 
@@ -28,7 +27,6 @@ import { TableRowComponent } from './table-row/table-row.component';
     HttpClientModule,
     BrowserModule,
     FormsModule,
-    DpDatePickerModule,
     ChartsModule,
     TooltipModule
   ],
