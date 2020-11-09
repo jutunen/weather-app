@@ -10,6 +10,8 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: example
     ports:
       - 27017:27017
+    volumes:
+      - /mnt/mongovolume:/data/db
 
   aspnet:
     build: .
@@ -19,3 +21,10 @@ services:
       - mongo
     environment:
       ASPNETCORE_URLS: http://aspnet:5000/
+
+  ngweather:
+    build: ../ng-weather
+    ports:
+      - 4200:4200
+    depends_on:
+      - aspnet
