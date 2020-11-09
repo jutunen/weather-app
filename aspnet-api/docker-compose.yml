@@ -22,6 +22,7 @@ services:
     environment:
       ASPNETCORE_URLS: http://aspnet:5000/
 
+  # Angular front-end:
   ngweather:
     build: ../ng-weather
     ports:
